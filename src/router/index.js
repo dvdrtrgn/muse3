@@ -17,6 +17,15 @@ const routes = [
       import(/* webpackChunkName: "tomato" */ '../views/calc/Tomato.vue'),
   },
   {
+    path: '/cars',
+    name: 'Cars',
+    meta: {
+      title: 'The Counter Intuitive Cars',
+    },
+    component: () =>
+      import(/* webpackChunkName: "cars" */ '../views/calc/Cars.vue'),
+  },
+  {
     path: '/vmail',
     name: 'Vmail',
     meta: {

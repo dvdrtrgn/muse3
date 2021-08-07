@@ -1,17 +1,19 @@
 <template>
   <h1>Take a fresh 100g tomato...</h1>
-  <h2>It’s approximately <span class="red">99%</span>&nbsp;water!</h2>
+  <h2 v-if="!accepted">
+    It’s approximately <span class="red">99%</span>&nbsp;water!
+  </h2>
 
   <div :style="`height: ${size * 1.2}px`">
     <label for="Guess">
       <TomatoSvg :width="size" :height="size" :reveal="fill" />
     </label>
 
-    <h3 id="Right" class="red" v-if="isCorrect">CORRECT</h3>
+    <h3 id="Right" class="red" v-if="isCorrect">HALF</h3>
   </div>
 
   <div id="Challenge">
-    <p>What’s the mass, when dehydrated to 98% water?</p>
+    <p v-if="!accepted || isCorrect">What’s the mass, when dehydrated to 98% water?</p>
 
     <div v-if="!accepted">
       <button @click="accepted = true">Accept Challenge</button>
@@ -62,7 +64,9 @@
     },
     computed: {
       isCorrect() {
-        return this.fill === 49;
+        let rez = this.fill === 49;
+        if (rez) this.finish();
+        return rez;
       },
       hintText() {
         let rez = 'Check';
