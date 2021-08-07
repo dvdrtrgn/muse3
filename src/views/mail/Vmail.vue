@@ -1,22 +1,28 @@
 <template>
   <h1>VMail Inbox</h1>
   <div id="vmail">
-    <Suspense>
+    <SuspenseWithError>
       <template #default>
         <MailTable />
       </template>
       <template #fallback>
         Requesting from server...
       </template>
-    </Suspense>
+      <template #error>
+        <b>Server unreachable for some reason!</b>
+        <p>see console</p>
+      </template>
+    </SuspenseWithError>
   </div>
 </template>
 
 <script>
+  import SuspenseWithError from './components/SuspenseWithError.vue';
   import MailTable from './components/MailTable.vue';
   export default {
     components: {
       MailTable,
+      SuspenseWithError,
     },
   };
 </script>
