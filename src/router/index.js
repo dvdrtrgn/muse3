@@ -8,6 +8,15 @@ const routes = [
     component: Home,
   },
   {
+    path: '/matrix',
+    name: 'Matrix',
+    meta: {
+      title: 'The Freaky Matrix',
+    },
+    component: () =>
+      import(/* webpackChunkName: "matrix" */ '../views/calc/Matrix.vue'),
+  },
+  {
     path: '/tomato',
     name: 'Tomato',
     meta: {
