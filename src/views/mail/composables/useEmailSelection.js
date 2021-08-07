@@ -1,10 +1,10 @@
-import { reactive } from "vue";
-import axios from "axios";
+import { reactive } from 'vue';
+import axios from 'axios';
 
 let emails = reactive(new Set());
 
 export function useEmailSelection() {
-  let toggle = email => {
+  let toggle = (email) => {
     if (emails.has(email)) {
       emails.delete(email);
     } else {
@@ -14,23 +14,23 @@ export function useEmailSelection() {
   let clear = () => {
     emails.clear();
   };
-  let addMultiple = arr => {
-    arr.forEach(e => {
+  let addMultiple = (arr) => {
+    arr.forEach((e) => {
       emails.add(e);
     });
   };
 
-  let forSelected = fn => {
-    emails.forEach(email => {
+  let forSelected = (fn) => {
+    emails.forEach((email) => {
       fn(email);
       axios.put(`http://localhost:3000/emails/${email.id}`, email);
     });
   };
 
-  let markRead = () => forSelected(e => (e.read = true));
-  let markUnread = () => forSelected(e => (e.read = false));
+  let markRead = () => forSelected((e) => (e.read = true));
+  let markUnread = () => forSelected((e) => (e.read = false));
   let archive = () => {
-    forSelected(e => (e.archived = true));
+    forSelected((e) => (e.archived = true));
     clear();
   };
 
@@ -41,7 +41,7 @@ export function useEmailSelection() {
     addMultiple,
     markRead,
     markUnread,
-    archive
+    archive,
   };
 }
 
