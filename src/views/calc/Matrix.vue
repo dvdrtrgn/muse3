@@ -1,115 +1,150 @@
 <template>
-  <label>
-    scale:
-    <input type="number" step="0.1" v-model.number="scaleX" />
-    <input type="number" step="0.1" v-model.number="scaleY" />
-  </label>
-  <label>
-    skew:
-    <input type="number" step="0.1" v-model.number="skewX" />
-    <input type="number" step="0.1" v-model.number="skewY" />
-  </label>
-  <label>
-    trans:
-    <input type="number" step="10" v-model.number="transX" />
-    <input type="number" step="10" v-model.number="transY" />
-  </label>
-  <label>
-    transform origin center
-    <input type="checkbox" v-model="checkbox" />
-  </label>
-  <label>
-    size:
-    <input type="number" step="10" v-model.number="size" />
-  </label>
-  <label>
-    transform axis center
-    <input type="number" step="0.1" v-model="adjust" />
-  </label>
-
-  <p>{{ matrix }}</p>
-  <p>{{ dematrix }}</p>
-
-  <div></div>
-  <svg
-    :viewBox="vbox"
-    :transform-origin="tranny"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <text style="text-anchor: middle; font-size: 10px;" x="-5" y="-3">0</text>
-    <text style="text-anchor: middle; font-size: 10px;" x="90" y="97">100</text>
-    <line style="stroke: #ccc;" x1="-100" y1="0" x2="100" y2="0"></line>
-    <line style="stroke: #ccc;" x1="0" y1="-100" x2="0" y2="100"></line>
-
-    <g :transform="matrix" :transform-origin="tranny">
+  <svg id="Bounds" :viewBox="vbox">
+    <g id="Big" :transform="matrix" :transform-origin="tranny">
       <rect
-        x="0"
-        y="0"
-        width="100"
-        height="100"
+        :x="placeAt(size1)"
+        :y="placeAt(size1)"
+        :width="size1"
+        :height="size1"
         style="fill: rgba(0,0,0,0.2)"
       ></rect>
+      <DotSvg />
     </g>
-    <g :transform="matrix" :transform-origin="tranny">
+    <g id="Little" :transform="matrix" :transform-origin="tranny">
       <rect
-        x="0"
-        y="0"
-        width="50"
-        height="50"
+        class="main"
+        :x="placeAt(size2)"
+        :y="placeAt(size2)"
+        :width="size2"
+        :height="size2"
         style="fill: rgba(0,0,0,0.4)"
       ></rect>
+      <DotSvg />
     </g>
+    <MetaSvg :size="size" :offset="offset" />
+    <DotSvg />
   </svg>
+
+  <form>
+    <label>
+      scale:
+      <input type="number" step="0.1" v-model.number="scaleX" />
+      <input type="number" step="0.1" v-model.number="scaleY" />
+      skew:
+      <input type="number" step="0.1" v-model.number="skewX" />
+      <input type="number" step="0.1" v-model.number="skewY" />
+    </label>
+    <label>
+      trans:
+      <input type="number" step="10" v-model.number="transX" />
+      <input type="number" step="10" v-model.number="transY" />
+    </label>
+    <label>
+      <b>center</b>
+      transforms:
+      <input type="checkbox" v-model="centerTransform" />
+      manually:
+      <input type="checkbox" v-model="centerBoxes" />
+      percent:
+      <input type="checkbox" v-model="byPercent" />
+    </label>
+    <label>
+      size:
+      <input type="number" step="10" v-model.number="size" />
+      bias:
+      <input type="number" step="10" v-model="bias" />%
+    </label>
+  </form>
+
+  <p>#Big {{ getTrans('#Big') }}</p>
+  <p>#Little {{ getTrans('#Little') }}</p>
+  <p>{{ matrix }}</p>
+  <pre>{{ dematrix }}</pre>
 </template>
 
 <script>
+  import MetaSvg from './components/MetaSvg.vue';
+  import DotSvg from './components/DotSvg.vue';
   import dematrix from './components/dematrix.js';
   window.dematrix = dematrix;
 
   export default {
+    components: { DotSvg, MetaSvg },
     data() {
       return {
         scaleX: 1,
         scaleY: 1,
-        skewX: -1,
-        skewY: 1,
-        transX: -50,
-        transY: -50,
-        checkbox: false,
+        skewX: 0,
+        skewY: 0,
+        transX: 0,
+        transY: 0,
         size: 200,
-        adjust: 0,
+        static: 100,
+        bias: 0,
+        centerTransform: true,
+        centerBoxes: false,
+        byPercent: false,
       };
     },
-    methods: {},
+    methods: {
+      getTrans(sel) {
+        let ele = document.querySelector(sel);
+        if (!ele) return 'foo';
+        return window.getComputedStyle(ele).getPropertyValue('transform');
+      },
+      placeAt(num) {
+        if (typeof num === 'string') num = parseFloat(num);
+        let val = this.centerBoxes ? -num / 2 : 0;
+
+        return val + (this.byPercent ? '%' : 0);
+      },
+    },
     computed: {
       tranny() {
-        return this.checkbox ? 'center center' : '';
+        return this.centerTransform ? 'center' : '';
       },
       matrix() {
         let o = this;
-        let m = `${o.scaleX}, ${o.skewY}, ${o.skewX}, ${o.scaleY}, ${o.transX}, ${o.transY}`;
-        return `matrix(${m})`;
+        let m = [o.scaleX, o.skewY, o.skewX, o.scaleY, o.transX, o.transY];
+        return `matrix(${m.join(', ')})`;
       },
       dematrix() {
         return dematrix.parse(this.matrix);
       },
       offset() {
-        return this.size * this.adjust;
+        return this.size * (this.bias / 100);
       },
       vbox() {
-        return `${this.offset} ${this.offset} ${this.size} ${this.size}`;
+        return `${-this.offset} ${-this.offset} ${this.size} ${this.size}`;
+      },
+      size1() {
+        return this.static / 1.1 + (this.byPercent ? '%' : 0);
+      },
+      size2() {
+        return this.static / 1.8 + (this.byPercent ? '%' : 0);
       },
     },
   };
-  /*
-  {{ dematrix.parse('matrix(1, 2, 3, 4, 5, 6)') }}
-    matrix(a, b, c, d, tx, ty)
-    is a shorthand for
-    matrix3d(a, b, 0, 0, c, d, 0, 0, 0, 0, 1, 0, tx, ty, 0, 1).
-  */
 </script>
 
 <style>
+  line {
+    stroke: #ccc;
+  }
+  text {
+    font-size: 10px;
+    text-anchor: middle;
+  }
+  #Big {
+    stroke: blue;
+  }
+  #Little {
+    stroke: lime;
+  }
+  #Bounds {
+    margin: auto;
+    width: 400px;
+  }
   svg {
     border: 1px solid red;
   }

@@ -2,15 +2,15 @@
   DeMatrix
   Take css transform gibberish; output sanity.
 */
-function DeMatrix(a, b, c, d, e, f) {
+function DeMatrix(zh, sy, sx, zv, tx, ty) {
   return {
-    b,
-    c,
-    rotation: Math.atan2(c, d) * (180 / Math.PI),
-    scaleX: a,
-    scaleY: d,
-    translateX: e,
-    translateY: f,
+    rotation: Math.atan2(sx, zv) * (180 / Math.PI),
+    scaleX: zh,
+    scaleY: zv,
+    skewY: sy,
+    skewX: sx,
+    translateX: tx,
+    translateY: ty,
   };
 }
 
@@ -24,3 +24,9 @@ DeMatrix.read2dCss = function(str) {
 };
 
 export default DeMatrix;
+
+  /*
+    matrix(a, b, c, d, tx, ty)
+    is a shorthand for
+    matrix3d(a, b, 0, 0, c, d, 0, 0, 0, 0, 1, 0, tx, ty, 0, 1).
+  */
