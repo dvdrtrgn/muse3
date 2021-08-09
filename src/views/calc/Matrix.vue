@@ -1,6 +1,6 @@
 <template>
   <svg id="Bounds" :viewBox="vbox">
-    <g id="Large" :transform="matrix" :transform-origin="tranny">
+    <g id="Large" :style="tranny">
       <rect
         :x="placeAt(size1)"
         :y="placeAt(size1)"
@@ -10,7 +10,7 @@
       ></rect>
       <DotSvg />
     </g>
-    <g id="Little" :transform="matrix" :transform-origin="tranny">
+    <g id="Little" :style="tranny">
       <rect
         class="main"
         :x="placeAt(size2)"
@@ -39,19 +39,17 @@
       <input type="number" step="10" v-model.number="transX" />
       <input type="number" step="10" v-model.number="transY" />
     </label>
+
+    <input type="checkbox" v-model="centerTransform" />center transforms
+    <input type="checkbox" v-model="centerBoxes" />center internally
+    <input type="checkbox" v-model="byPercent" />size by percent
+
     <label>
-      <b>center</b>
-      transforms:
-      <input type="checkbox" v-model="centerTransform" />
-      manually:
-      <input type="checkbox" v-model="centerBoxes" />
-      percent:
-      <input type="checkbox" v-model="byPercent" />
+      size bounds:
+      <input type="number" step="10" v-model.number="size" />
     </label>
     <label>
-      size:
-      <input type="number" step="10" v-model.number="size" />
-      bias:
+      axis bias:
       <input type="number" step="10" v-model="bias" />%
     </label>
   </form>
@@ -72,8 +70,8 @@
     components: { DotSvg, MetaSvg },
     data() {
       return {
-        scaleX: 1,
-        scaleY: 1,
+        scaleX: 0.5,
+        scaleY: 0.5,
         skewX: 0,
         skewY: 0,
         transX: 0,
@@ -98,10 +96,16 @@
 
         return val + (this.byPercent ? '%' : 0);
       },
+      trannyAll(matrix, origin) {
+        let transm = ` transform: ${matrix}; `;
+        let transo = ` transform-origin: ${origin}; `;
+        return transo + transm;
+      },
     },
     computed: {
       tranny() {
-        return this.centerTransform ? 'center' : '';
+        let origin = this.centerTransform ? 'center' : '';
+        return this.trannyAll(this.matrix, origin);
       },
       matrix() {
         let o = this;
@@ -118,10 +122,10 @@
         return `${-this.offset} ${-this.offset} ${this.size} ${this.size}`;
       },
       size1() {
-        return this.static / 1.1 + (this.byPercent ? '%' : 0);
+        return this.static / 1 + (this.byPercent ? '%' : 0);
       },
       size2() {
-        return this.static / 1.8 + (this.byPercent ? '%' : 0);
+        return this.static / 2 + (this.byPercent ? '%' : 0);
       },
     },
   };
@@ -148,7 +152,7 @@
     input[type='number'] {
       font-size: 1rem;
       text-align: right;
-      width: 5rem;
+      width: 4rem;
     }
   }
 </style>

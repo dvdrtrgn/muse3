@@ -18,7 +18,7 @@
 
 <style lang="scss">
   line {
-    stroke: #ccc;
+    stroke: rgba(0, 0, 0, 0.2);
   }
   text {
     font-size: 10px;
