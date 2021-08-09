@@ -13,7 +13,9 @@
   </div>
 
   <div id="Challenge">
-    <p v-if="!accepted || isCorrect">What’s the mass, when dehydrated to 98% water?</p>
+    <p v-if="!accepted || isCorrect">
+      What’s the mass, when dehydrated to 98% water?
+    </p>
 
     <div v-if="!accepted">
       <button @click="accepted = true">Accept Challenge</button>
@@ -81,14 +83,16 @@
   };
 </script>
 
-<style>
-  #Right {
-    line-height: 0;
-    margin: 0;
-    position: relative;
-    top: -55%;
-  }
-  .red {
-    color: #b00;
+<style lang="scss">
+  #Tomato {
+    #Right {
+      line-height: 0;
+      margin: 0;
+      position: relative;
+      top: -55%;
+    }
+    .red {
+      color: #b00;
+    }
   }
 </style>

@@ -147,36 +147,38 @@
   };
 </script>
 
-<style>
-  table {
-    border-collapse: collapse;
-    line-height: 1.5;
-    margin: auto;
-    max-width: 33rem;
-    width: 100%;
-  }
-  td,
-  th {
-    padding: 0.5em;
-  }
-  tr + tr {
-    border-top: 1px solid #ccc;
-  }
-  input {
-    font-size: 1rem;
-    text-align: right;
-    width: 2em;
-  }
-  h6 {
-    margin: 0;
-  }
+<style lang="scss">
+  #Cars {
+    table {
+      border-collapse: collapse;
+      line-height: 1.5;
+      margin: auto;
+      max-width: 33rem;
+      width: 100%;
+    }
+    td,
+    th {
+      padding: 0.5em;
+    }
+    tr + tr {
+      border-top: 1px solid #ccc;
+    }
+    input {
+      font-size: 1rem;
+      text-align: right;
+      width: 2em;
+    }
+    h6 {
+      margin: 0;
+    }
 
-  .editable {
-    background: white;
-    box-shadow: 0 0 0.2em grey;
-    border: 0;
-    border-radius: 0.2em;
-    line-height: 1;
-    padding: 0.2em 0.3em 0;
+    .editable {
+      background: white;
+      box-shadow: 0 0 0.2em grey;
+      border: 0;
+      border-radius: 0.2em;
+      line-height: 1;
+      padding: 0.2em 0.3em 0;
+    }
   }
 </style>

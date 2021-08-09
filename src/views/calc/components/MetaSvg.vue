@@ -15,3 +15,13 @@
     props: ['size', 'offset'],
   });
 </script>
+
+<style lang="scss">
+  line {
+    stroke: #ccc;
+  }
+  text {
+    font-size: 10px;
+    text-anchor: middle;
+  }
+</style>

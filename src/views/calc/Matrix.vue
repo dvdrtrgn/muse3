@@ -1,6 +1,6 @@
 <template>
   <svg id="Bounds" :viewBox="vbox">
-    <g id="Big" :transform="matrix" :transform-origin="tranny">
+    <g id="Large" :transform="matrix" :transform-origin="tranny">
       <rect
         :x="placeAt(size1)"
         :y="placeAt(size1)"
@@ -56,7 +56,7 @@
     </label>
   </form>
 
-  <p>#Big {{ getTrans('#Big') }}</p>
+  <p>#Large {{ getTrans('#Large') }}</p>
   <p>#Little {{ getTrans('#Little') }}</p>
   <p>{{ matrix }}</p>
   <pre>{{ dematrix }}</pre>
@@ -127,33 +127,28 @@
   };
 </script>
 
-<style>
-  line {
-    stroke: #ccc;
-  }
-  text {
-    font-size: 10px;
-    text-anchor: middle;
-  }
-  #Big {
-    stroke: blue;
-  }
-  #Little {
-    stroke: lime;
-  }
-  #Bounds {
-    margin: auto;
-    width: 400px;
-  }
-  svg {
-    border: 1px solid red;
-  }
-  label {
-    display: block;
-  }
-  input[type='number'] {
-    font-size: 1rem;
-    width: 5rem;
-    text-align: right;
+<style lang="scss">
+  #Matrix {
+    #Large {
+      stroke: blue;
+    }
+    #Little {
+      stroke: lime;
+    }
+    #Bounds {
+      margin: auto;
+      width: 400px;
+    }
+    svg {
+      border: 1px solid red;
+    }
+    label {
+      display: block;
+    }
+    input[type='number'] {
+      font-size: 1rem;
+      text-align: right;
+      width: 5rem;
+    }
   }
 </style>
