@@ -1,55 +1,76 @@
 <template>
   <div class="about"></div>
-  <div id="Range">
-    <h1>Range</h1>
+  <h1>About</h1>
+  <div id="Range" class="tidy">
+    <h2>Range</h2>
     <div class="flex line">
       <div>
-        Set range:
+        Set spread:
         <div>
           <label>
-            <input v-model.number="range.min" type="number" />
-            min
+            min <input v-model.number="spread.min" type="number" />
           </label>
           <label>
-            <input v-model.number="range.max" type="number" />
-            max
+            max <input v-model.number="spread.max" type="number" />
           </label>
         </div>
       </div>
       <div>
-        Properties:
-        <p>( {{ range.min }} .. {{ range.max }} )</p>
-        <p><b>delta:</b> {{ range.delta }}</p>
-        <p :class="{ error: !range.valid }"><b>valid:</b> {{ range.valid }}</p>
+        <h3>Properties:</h3>
+        <p>( {{ spread.min }} .. {{ spread.max }} )</p>
+        <p><b>delta:</b> {{ spread.delta }}</p>
+        <p :class="{ error: !spread.valid }">
+          <b>valid:</b> {{ spread.valid }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="Normal" class="tidy">
+    <h2>Normal</h2>
+    <div class="flex line">
+      <div>
+        Set integer:
+        <label>
+          raw <input v-model.number="integer.raw" type="number" />
+        </label>
       </div>
       <div>
-        Derive:
-        <label>
-          <input v-model.number="norm" type="number" />
-          <br />Normalized:
-          {{ range.calcNorm(norm).toLocaleString() }}
-        </label>
+        <h3>Properties:</h3>
+        <p><b>value:</b> {{ integer.value.toLocaleString() }}</p>
+        <p :class="{ error: !integer.valid }">
+          <b>valid:</b> {{ integer.valid }}
+        </p>
+        <p><b>over:</b> {{ integer.over }}</p>
+        <p><b>under:</b> {{ integer.under }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { defineComponent, onUpdated, reactive, ref } from 'vue';
+  import { defineComponent, onUpdated, reactive } from 'vue';
   import Range from '../libs/range';
-  window.Range = Range;
+  import Normal from '../libs/normal';
+
+  Object.assign(window, {
+    Range,
+    Normal,
+  });
 
   export default defineComponent({
     setup() {
-      let range = reactive(new Range());
-      let norm = ref(0);
-      console.log('range', range);
-      onUpdated(() => {
-        // console.log('range', range);
-      });
+      let spread = reactive(new Range());
+      let integer = reactive(new Normal(spread));
+
+      integer.raw = 0;
+      console.log({ integer, spread });
+
+      onUpdated(() => {});
+
       return {
-        range,
-        norm,
+        spread,
+        integer,
       };
     },
   });
@@ -70,7 +91,12 @@
   .error {
     color: red;
   }
-  #Range {
+  .tidy {
+    border: 1px solid silver;
+    h2,
+    p {
+      margin: 0;
+    }
     label {
       display: block;
       margin: 1rem;

@@ -20,20 +20,18 @@ export default class Range {
     this._enforceOrder();
   }
 
-  get delta() {
-    return this._b - this._a;
-  }
-  get valid() {
-    return this._b > this._a;
-  }
-
   constructor(min = -1, max = 1) {
     if (min == max) max = min + 1;
     this.min = min;
     this.max = max;
   }
 
-  calcNorm(num) {
-    return (num - this._a) / this.delta;
+  // extra
+
+  get delta() {
+    return this._b - this._a;
+  }
+  get valid() {
+    return this._b > this._a;
   }
 }
