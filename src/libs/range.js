@@ -1,20 +1,39 @@
 export default class Range {
-  constructor(min, max) {
-    min = min || 0;
-    max = max || 1;
+  _enforceOrder() {
+    if (this._a === this._b) throw 'not a range';
+    if (this._b <= this._a) [this._a, this._b] = [this._b, this._a];
+  }
 
-    if (min === max) throw 'not a range';
+  get min() {
+    return this._a;
+  }
+  get max() {
+    return this._b;
+  }
 
-    this.min = min;
-    this.max = max;
-
-    if (this.inverted) console.log('inverted!');
+  set min(num) {
+    this._a = Number(num);
+    this._enforceOrder();
+  }
+  set max(num) {
+    this._b = Number(num);
+    this._enforceOrder();
   }
 
   get delta() {
-    return Math.abs(this.max - this.min);
+    return this._b - this._a;
   }
-  get inverted() {
-    return this.max <= this.min;
+  get valid() {
+    return this._b > this._a;
+  }
+
+  constructor(min = -1, max = 1) {
+    if (min == max) max = min + 1;
+    this.min = min;
+    this.max = max;
+  }
+
+  calcNorm(num) {
+    return (num - this._a) / this.delta;
   }
 }
