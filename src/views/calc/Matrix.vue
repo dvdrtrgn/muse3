@@ -1,6 +1,11 @@
 <template>
+  <p>
+    readTransforms<br />
+    LargeBox {{ dematrix.readTransform('#LargeBox') }}<br />
+    SmallBox {{ dematrix.readTransform('#SmallBox') }}
+  </p>
   <svg id="Bounds" :viewBox="vbox">
-    <g id="Large" :style="tranny">
+    <g id="LargeBox" :style="tranny">
       <rect
         :x="placeAt(size1)"
         :y="placeAt(size1)"
@@ -10,7 +15,7 @@
       ></rect>
       <DotSvg />
     </g>
-    <g id="Little" :style="tranny">
+    <g id="SmallBox" :style="tranny">
       <rect
         class="main"
         :x="placeAt(size2)"
@@ -54,16 +59,14 @@
     </label>
   </form>
 
-  <p>#Large {{ getTrans('#Large') }}</p>
-  <p>#Little {{ getTrans('#Little') }}</p>
   <p>{{ matrix }}</p>
-  <pre>{{ dematrix }}</pre>
+  <pre>dematrix {{ dematrix.parse(matrix) }}</pre>
 </template>
 
 <script>
   import MetaSvg from './components/MetaSvg.vue';
   import DotSvg from './components/DotSvg.vue';
-  import dematrix from './components/dematrix.js';
+  import dematrix from './libs/dematrix.js';
   window.dematrix = dematrix;
 
   export default {
@@ -85,11 +88,6 @@
       };
     },
     methods: {
-      getTrans(sel) {
-        let ele = document.querySelector(sel);
-        if (!ele) return 'foo';
-        return window.getComputedStyle(ele).getPropertyValue('transform');
-      },
       placeAt(num) {
         if (typeof num === 'string') num = parseFloat(num);
         let val = this.centerBoxes ? -num / 2 : 0;
@@ -113,7 +111,7 @@
         return `matrix(${m.join(', ')})`;
       },
       dematrix() {
-        return dematrix.parse(this.matrix);
+        return dematrix;
       },
       offset() {
         return this.size * (this.bias / 100);
@@ -133,10 +131,10 @@
 
 <style lang="scss">
   #Matrix {
-    #Large {
+    #LargeBox {
       stroke: blue;
     }
-    #Little {
+    #SmallBox {
       stroke: lime;
     }
     #Bounds {

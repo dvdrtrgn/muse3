@@ -23,10 +23,19 @@ DeMatrix.read2dCss = function(str) {
   return (str || '1, 0, 0, 1, 0, 0').split(', ').map(Number);
 };
 
+DeMatrix.readTransform = function(sel) {
+  let ele;
+  if (typeof sel !== 'string') ele = sel;
+  else ele = document.querySelector(sel);
+  if (!ele) return '{missing}';
+
+  return window.getComputedStyle(ele).getPropertyValue('transform');
+};
+
 export default DeMatrix;
 
-  /*
-    matrix(a, b, c, d, tx, ty)
-    is a shorthand for
-    matrix3d(a, b, 0, 0, c, d, 0, 0, 0, 0, 1, 0, tx, ty, 0, 1).
-  */
+/*
+  matrix(a, b, c, d, tx, ty)
+  is a shorthand for
+  matrix3d(a, b, 0, 0, c, d, 0, 0, 0, 0, 1, 0, tx, ty, 0, 1).
+*/
