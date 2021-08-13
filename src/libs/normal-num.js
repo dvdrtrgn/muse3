@@ -1,4 +1,6 @@
-import Range from './range';
+import Range from './range-tuple.js';
+
+const typename = (self) => self.constructor.name;
 
 function _calcAbs(self, num) {
   return self.range.delta * num + self.range.min;
@@ -7,7 +9,7 @@ function _calcRel(self, num) {
   return (num - self.range.min) / self.range.delta;
 }
 
-class Normal {
+export default class NormalNum {
   get abs() {
     return this._raw;
   }
@@ -20,7 +22,7 @@ class Normal {
   }
   set rel(num) {
     if (this.range.valid) this._raw = _calcAbs(this, num);
-    else throw 'Normal: invalid range';
+    else throw `${typename(this)}: invalid range`;
   }
 
   constructor(max) {
@@ -59,5 +61,3 @@ class Normal {
     return this.rel.toLocaleString();
   }
 }
-
-export default Normal;

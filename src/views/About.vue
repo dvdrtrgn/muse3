@@ -64,8 +64,8 @@
 
 <script>
   import { defineComponent, onUpdated, reactive } from 'vue';
-  import Range from '../libs/range';
-  import Normal from '../libs/normal';
+  import Range from '../libs/range-tuple';
+  import Normal from '../libs/normal-num';
 
   Object.assign(window, {
     Range,

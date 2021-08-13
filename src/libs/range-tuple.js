@@ -1,3 +1,4 @@
+const typename = (self) => self.constructor.name;
 const tinyfloat = (num) => Number.EPSILON * num || Number.EPSILON;
 
 function wiggle(self) {
@@ -7,7 +8,7 @@ function wiggle(self) {
   self._b = max;
 }
 
-class Range {
+export default class RangeTuple {
   _a; // min
   _b; // max
   _s = true; // strict
@@ -17,7 +18,8 @@ class Range {
   }
   _enforceOrder() {
     if (this.strict) wiggle(this);
-    if (this._a === this._b) throw `Range: bad min|max ${this._a}/${this._b}`;
+    if (this._a === this._b)
+      throw `${typename(this)}: bad min|max ${this._a}/${this._b}`;
     if (this._b <= this._a) this._swap();
   }
 
@@ -59,5 +61,3 @@ class Range {
     return this._b > this._a;
   }
 }
-
-export default Range;
