@@ -2,10 +2,10 @@
   <div class="about"></div>
   <h1>About</h1>
   <div id="Range" class="tidy">
-    <h2>Range</h2>
+    <h2>Demo Range</h2>
     <div class="flex line">
       <div>
-        Set spread:
+        Set spread...
         <div>
           <label>
             min <input v-model.number="spread.min" type="number" />
@@ -17,27 +17,38 @@
       </div>
       <div>
         <h3>Properties:</h3>
-        <p>( {{ spread.min }} .. {{ spread.max }} )</p>
-        <p><b>delta:</b> {{ spread.delta }}</p>
+        <p><b>min:</b> {{ spread.min }}</p>
+        <p><b>max:</b> {{ spread.max }}</p>
+        <hr>
         <p :class="{ error: !spread.valid }">
           <b>valid:</b> {{ spread.valid }}
         </p>
+        <p><b>delta:</b> {{ spread.delta.toLocaleString() }}</p>
       </div>
     </div>
   </div>
 
   <div id="Normal" class="tidy">
-    <h2>Normal</h2>
+    <h2>Demo Normal</h2>
     <div class="flex line">
       <div>
-        Set integer:
+        Set integer...
         <label>
-          raw <input v-model.number="integer.raw" type="number" />
+          abs <input v-model.number="integer.abs" type="number" />
+        </label>
+        <label>
+          rel <input v-model.number="integer.rel" type="number" step="0.1" />
+        </label>
+        <label v-show="!integer.valid">
+          rescale
+          <input @click="integer.rescale" type="button" value="scale" />
         </label>
       </div>
       <div>
         <h3>Properties:</h3>
-        <p><b>value:</b> {{ integer.value.toLocaleString() }}</p>
+        <p><b>abs:</b> {{ integer.abs.toLocaleString() }}</p>
+        <p><b>rel:</b> {{ integer.rel.toLocaleString() }}</p>
+        <hr>
         <p :class="{ error: !integer.valid }">
           <b>valid:</b> {{ integer.valid }}
         </p>
@@ -63,7 +74,7 @@
       let spread = reactive(new Range());
       let integer = reactive(new Normal(spread));
 
-      integer.raw = 0;
+      integer.abs = 0;
       console.log({ integer, spread });
 
       onUpdated(() => {});
@@ -94,6 +105,7 @@
   .tidy {
     border: 1px solid silver;
     h2,
+    h3,
     p {
       margin: 0;
     }
@@ -101,7 +113,7 @@
       display: block;
       margin: 1rem;
     }
-    input {
+    input[type='number'] {
       font-size: 2rem;
       text-align: center;
       width: 3em;

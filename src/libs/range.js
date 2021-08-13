@@ -1,6 +1,6 @@
-export default class Range {
+class Range {
   _enforceOrder() {
-    if (this._a === this._b) throw 'not a range';
+    if (this._a === this._b) throw `Range: bad min|max ${this._a}/${this._b}`;
     if (this._b <= this._a) [this._a, this._b] = [this._b, this._a];
   }
 
@@ -26,7 +26,7 @@ export default class Range {
     this.max = max;
   }
 
-  // extra
+  // extras
 
   get delta() {
     return this._b - this._a;
@@ -35,3 +35,5 @@ export default class Range {
     return this._b > this._a;
   }
 }
+
+export default Range;

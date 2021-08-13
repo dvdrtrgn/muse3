@@ -1,15 +1,26 @@
 import Range from './range';
 
-export default class Normal {
-  calcNorm(num) {
-    return (num - this.range.min) / this.range.delta;
+function _calcAbs(self, num) {
+  return self.range.delta * num + self.range.min;
+}
+function _calcRel(self, num) {
+  return (num - self.range.min) / self.range.delta;
+}
+
+class Normal {
+  get abs() {
+    return this._raw;
   }
-  calc(num) {
-    return this.calcNorm(num || this.raw);
+  get rel() {
+    return _calcRel(this, this._raw);
   }
 
-  get value() {
-    return this.calcNorm(this.raw);
+  set abs(num) {
+    this._raw = Number(num);
+  }
+  set rel(num) {
+    if (this.range.valid) this._raw = _calcAbs(this, num);
+    else throw 'Normal: invalid range';
   }
 
   constructor(max) {
@@ -21,19 +32,32 @@ export default class Normal {
       range = new Range(0, max);
     }
 
-    this.raw = range.max;
+    this.abs = range.max;
     this.range = range;
   }
 
-  // extra
+  // extras
 
   get over() {
-    return this.value > 1;
+    return this.rel > 1;
   }
   get under() {
-    return this.value < 0;
+    return this.rel < 0;
   }
   get valid() {
     return !(this.over || this.under);
   }
+
+  rescale() {
+    if (this.under) {
+      this.range.min = this.abs;
+    } else if (this.over) {
+      this.range.max = this.abs;
+    }
+  }
+  relative() {
+    return this.rel.toLocaleString();
+  }
 }
+
+export default Normal;
