@@ -61,10 +61,15 @@
     </div>
   </div>
 
-  <div id="Watch">
-    Watch (watcher)
-    <p>{{ watcher.lastpoint }}</p>
-    <p>{{ watcher.direction }}</p>
+  <div id="Watch" class="tidy">
+    <h2>Watch Mouse</h2>
+    <div class="flex line">
+      <div class="target" :style="colorBorder(watcher.degree)">
+        <p><b>movement</b>: {{ watcher.movement }}</p>
+        <p><b>degree</b>: {{ watcher.degree }}</p>
+        <p><b>bearing</b>: {{ watcher.bearing }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,16 +82,17 @@
   Object.assign(window, {
     Range,
     Normal,
+    MouseWatch,
   });
 
   export default defineComponent({
     setup() {
       let spread = reactive(new Range());
       let integer = reactive(new Normal(spread));
-      let watcher = MouseWatch('#Watch');
+      let watcher = MouseWatch('#Watch .target');
 
       integer.abs = 0;
-      console.log({ integer, spread });
+      console.log({ integer, spread, watcher});
 
       onUpdated(() => {});
 
@@ -102,10 +108,20 @@
     beforeUnmount() {
       this.watcher.unbind();
     },
+    methods: {
+      colorBorder(num) {
+        let deg = (Number(num) || 0) % 360;
+        return `border: 10px solid hsl(${deg}, 99%, 33%)`;
+      },
+    },
   });
 </script>
 
 <style lang="scss">
+  .target {
+    background-color: silver;
+    min-width: 50%;
+  }
   .flex {
     display: flex;
     justify-content: center;
