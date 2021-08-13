@@ -13,12 +13,15 @@
           <label>
             max <input v-model.number="spread.max" type="number" />
           </label>
+          <label>
+            strict <input v-model.number="spread.strict" type="checkbox" />
+          </label>
         </div>
       </div>
       <div>
         <h3>Properties:</h3>
-        <p><b>min:</b> {{ spread.min }}</p>
-        <p><b>max:</b> {{ spread.max }}</p>
+        <p><b>min:</b> {{ spread.min.toLocaleString() }}</p>
+        <p><b>max:</b> {{ spread.max.toLocaleString() }}</p>
         <hr>
         <p :class="{ error: !spread.valid }">
           <b>valid:</b> {{ spread.valid }}
