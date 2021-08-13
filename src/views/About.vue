@@ -22,7 +22,7 @@
         <h3>Properties:</h3>
         <p><b>min:</b> {{ spread.min.toLocaleString() }}</p>
         <p><b>max:</b> {{ spread.max.toLocaleString() }}</p>
-        <hr>
+        <hr />
         <p :class="{ error: !spread.valid }">
           <b>valid:</b> {{ spread.valid }}
         </p>
@@ -51,7 +51,7 @@
         <h3>Properties:</h3>
         <p><b>abs:</b> {{ integer.abs.toLocaleString() }}</p>
         <p><b>rel:</b> {{ integer.rel.toLocaleString() }}</p>
-        <hr>
+        <hr />
         <p :class="{ error: !integer.valid }">
           <b>valid:</b> {{ integer.valid }}
         </p>
@@ -60,12 +60,19 @@
       </div>
     </div>
   </div>
+
+  <div id="Watch">
+    Watch (watcher)
+    <p>{{ watcher.lastpoint }}</p>
+    <p>{{ watcher.direction }}</p>
+  </div>
 </template>
 
 <script>
   import { defineComponent, onUpdated, reactive } from 'vue';
-  import Range from '../libs/range-tuple';
-  import Normal from '../libs/normal-num';
+  import Range from '../libs/range-tuple.js';
+  import Normal from '../libs/normal-num.js';
+  import MouseWatch from '../libs/mouse-watch.js';
 
   Object.assign(window, {
     Range,
@@ -76,6 +83,7 @@
     setup() {
       let spread = reactive(new Range());
       let integer = reactive(new Normal(spread));
+      let watcher = MouseWatch('#Watch');
 
       integer.abs = 0;
       console.log({ integer, spread });
@@ -85,7 +93,14 @@
       return {
         spread,
         integer,
+        watcher,
       };
+    },
+    mounted() {
+      this.watcher.bind();
+    },
+    beforeUnmount() {
+      this.watcher.unbind();
     },
   });
 </script>
@@ -117,7 +132,7 @@
       margin: 1rem;
     }
     input[type='number'] {
-      font-size: 2rem;
+      font-size: 1.5rem;
       text-align: center;
       width: 3em;
     }
