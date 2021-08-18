@@ -16,7 +16,7 @@
   });
 </script>
 
-<style lang="scss">
+<style scoped>
   line {
     stroke: rgba(0, 0, 0, 0.2);
   }

@@ -92,7 +92,7 @@
       let watcher = MouseWatch('#Watch .target');
 
       integer.abs = 0;
-      console.log({ integer, spread, watcher});
+      console.log({ integer, spread, watcher });
 
       onUpdated(() => {});
 
@@ -118,39 +118,41 @@
 </script>
 
 <style lang="scss">
-  .target {
-    background-color: silver;
-    min-width: 50%;
-  }
-  .flex {
-    display: flex;
-    justify-content: center;
-  }
-  .line {
-    justify-content: space-around;
-    > * {
+  #About {
+    .target {
+      background-color: silver;
+      min-width: 50%;
+    }
+    .flex {
+      display: flex;
+      justify-content: center;
+    }
+    .line {
+      justify-content: space-around;
+      > * {
+        border: 1px solid silver;
+        padding: 1em;
+      }
+    }
+    .error {
+      color: red;
+    }
+    .tidy {
       border: 1px solid silver;
-      padding: 1em;
-    }
-  }
-  .error {
-    color: red;
-  }
-  .tidy {
-    border: 1px solid silver;
-    h2,
-    h3,
-    p {
-      margin: 0;
-    }
-    label {
-      display: block;
-      margin: 1rem;
-    }
-    input[type='number'] {
-      font-size: 1.5rem;
-      text-align: center;
-      width: 3em;
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      label {
+        display: block;
+        margin: 1rem;
+      }
+      input[type='number'] {
+        font-size: 1.5rem;
+        text-align: center;
+        width: 3em;
+      }
     }
   }
 </style>

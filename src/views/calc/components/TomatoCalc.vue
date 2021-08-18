@@ -66,7 +66,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   label {
     display: block;
     margin: 1rem;
