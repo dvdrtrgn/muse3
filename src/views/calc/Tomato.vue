@@ -9,12 +9,12 @@
       <TomatoSvg :width="size" :height="size" :reveal="fill" />
     </label>
 
-    <h3 id="Right" class="red" v-if="isCorrect">HALF</h3>
+    <h3 id="Right" class="red" v-if="isCorrect">HALF<br>IS RIGHT</h3>
   </div>
 
   <div id="Challenge">
     <p v-if="!accepted || isCorrect">
-      What’s the mass, when dehydrated to 98% water?
+      Guess the mass, when dehydrated to 98% water:
     </p>
 
     <div v-if="!accepted">
@@ -86,10 +86,10 @@
 <style lang="scss">
   #Tomato {
     #Right {
-      line-height: 0;
+      line-height: 1;
       margin: 0;
       position: relative;
-      top: -55%;
+      top: -60%;
     }
     .red {
       color: #b00;

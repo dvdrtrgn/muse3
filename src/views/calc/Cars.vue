@@ -109,8 +109,8 @@
         carA2: 35,
         carB1: 8,
         carB2: 10,
-        distance: 44,
-        price: 3.98,
+        distance: 10,
+        price: 1,
       };
     },
     methods: {

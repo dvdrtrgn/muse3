@@ -11,6 +11,7 @@
       <template #error>
         <b>Server unreachable for some reason!</b>
         <p>see console</p>
+        <i>database probably isn't running</i>
       </template>
     </SuspenseWithError>
   </div>
