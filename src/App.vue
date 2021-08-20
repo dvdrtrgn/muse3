@@ -1,9 +1,20 @@
 <template>
-  <div id="nav">
-    <nav v-for="(route, i) in routes" :key="i">
-      <router-link :to="route.path">{{ route.name }}</router-link>
-    </nav>
-  </div>
+  <nav id="Nav">
+    <ul>
+      <li v-for="(parent, i) in routes" :key="i">
+        <router-link :to="parent.path">{{ parent.name }}</router-link>
+
+        <ul v-if="parent.children">
+          <li v-for="(child, i) in parent.children" :key="i">
+            <router-link :to="`${parent.path}/${child.path}`">{{
+              child.name
+            }}</router-link>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
   <div :id="$route.name">
     <router-view />
   </div>
@@ -36,22 +47,56 @@
     color: #2c3e50;
     text-align: center;
   }
-  #nav {
+  #Nav {
     padding: 1rem;
+
     a {
       color: #2c3e50;
-      font-weight: bold;
+
+      &.router-link-active {
+        font-weight: bold;
+      }
+      &.router-link-exact-active {
+        color: #42b983;
+      }
     }
-    a.router-link-exact-active {
-      color: #42b983;
-    }
-    nav {
-      border-right: 2px solid silver;
-      display: inline;
-      line-height: 0;
-      padding: 0 0.5em;
-      &:last-child {
-        border-right: 0;
+
+    ul {
+      background-color: white;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      :hover a {
+        color: #911c1c;
+      }
+
+      li {
+        border-right: 2px solid #eee;
+        display: inline;
+        padding: 0 0.5em;
+        &:last-child {
+          border-right: 0;
+        }
+
+        a.router-link-active + ul {
+          display: block;
+        }
+        // NESTED
+        a:hover + ul {
+          display: block;
+          z-index: 1;
+        }
+        ul {
+          display: none;
+          position: absolute;
+          width: 100%;
+          &:hover {
+            display: block;
+            z-index: 2;
+          }
+        }
       }
     }
   }
