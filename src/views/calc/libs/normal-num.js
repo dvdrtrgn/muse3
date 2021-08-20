@@ -46,7 +46,7 @@ export default class NormalNum {
   get under() {
     return this.rel < 0;
   }
-  get valid() {
+  get bounded() {
     return !(this.over || this.under);
   }
 

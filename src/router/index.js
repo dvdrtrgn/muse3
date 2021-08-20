@@ -44,6 +44,12 @@ const routes = [
       import(/* webpackChunkName: "vmail" */ '../views/mail/Vmail.vue'),
   },
   {
+    path: '/range',
+    name: 'Range',
+    component: () =>
+      import(/* webpackChunkName: "range" */ '../views/calc/Range.vue'),
+  },
+  {
     path: '/about',
     name: 'About',
     component: () =>
