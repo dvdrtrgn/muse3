@@ -47,8 +47,11 @@
         <label>
           rel <input v-model.number="weight.rel" type="number" step="0.1" />
         </label>
+        <label>
+          srel <input v-model.lazy.number="weight.srel" step="0.1" />
+        </label>
         <label v-show="!weight.bounded">
-          rescale
+          adust range
           <input @click="weight.rescale" type="button" value="scale" />
         </label>
       </div>
@@ -56,6 +59,7 @@
         <h3>Properties:</h3>
         <p><b>abs:</b> {{ weight.abs.toLocaleString() }}</p>
         <p><b>rel:</b> {{ weight.rel.toLocaleString() }}</p>
+        <p><b>srel:</b> {{ weight.srel.toLocaleString() }} (signed)</p>
         <hr />
         <p :class="{ error: !weight.bounded }">
           <b>bounded:</b> {{ weight.bounded }}
@@ -73,8 +77,9 @@
     </p>
     <p>
       <i>
-        Usually the purpose clamp it between 0 and 1. <br />
-        The fraction of the range can be called a “normal” value.
+        The fraction of the range can be called a “normalized” value. <br />
+        Usually the purpose is to clamp it between 0 and 1, inclusive. <br />
+        (Or in the case of “signed normal” between -1 and 1.)
       </i>
     </p>
   </div>

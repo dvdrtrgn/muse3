@@ -40,6 +40,13 @@ export default class NormalNum {
 
   // extras
 
+  get srel() {
+    return this.rel * 2 - 1;
+  }
+  set srel(num) {
+    this.rel = (num + 1) / 2;
+  }
+
   get over() {
     return this.rel > 1;
   }
