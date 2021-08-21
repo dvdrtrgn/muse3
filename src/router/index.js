@@ -9,7 +9,7 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  {
+  /* calc */ {
     path: '/calc',
     name: 'Calc',
     component: Calc,
@@ -18,13 +18,22 @@ const routes = [
     },
     children: [
       {
+        path: 'velo',
+        name: 'Velo',
+        meta: {
+          title: 'The Counter Intuitive Velo',
+        },
+        component: () =>
+          import(/* webpackChunkName: "Velo" */ '../views/calc/Velo.vue'),
+      },
+      {
         path: 'tomato',
         name: 'Tomato',
         meta: {
           title: 'The Counter Intuitive Tomato',
         },
         component: () =>
-          import(/* webpackChunkName: "tomato" */ '../views/calc/Tomato.vue'),
+          import(/* webpackChunkName: "Tomato" */ '../views/calc/Tomato.vue'),
       },
       {
         path: 'cars',
@@ -33,17 +42,17 @@ const routes = [
           title: 'The Counter Intuitive Cars',
         },
         component: () =>
-          import(/* webpackChunkName: "cars" */ '../views/calc/Cars.vue'),
+          import(/* webpackChunkName: "Cars" */ '../views/calc/Cars.vue'),
       },
       {
         path: 'range',
         name: 'Range',
         component: () =>
-          import(/* webpackChunkName: "range" */ '../views/calc/Range.vue'),
+          import(/* webpackChunkName: "Range" */ '../views/calc/Range.vue'),
       },
     ],
   },
-  {
+  /* wip */ {
     path: '/wip',
     name: 'Wip',
     component: Wip,
