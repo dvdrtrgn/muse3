@@ -132,19 +132,5 @@
     .error {
       color: red;
     }
-    .tidy {
-      border: 1px solid silver;
-      h2,
-      h3,
-      label {
-        display: inline-block;
-        margin: 1rem;
-      }
-      input[type='number'] {
-        font-size: 1.5rem;
-        text-align: center;
-        width: 3em;
-      }
-    }
   }
 </style>

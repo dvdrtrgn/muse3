@@ -21,7 +21,7 @@ const routes = [
         path: 'velo',
         name: 'Velo',
         meta: {
-          title: 'The Counter Intuitive Velo',
+          title: 'The Counter Intuitive Flight',
         },
         component: () =>
           import(/* webpackChunkName: "Velo" */ '../views/calc/Velo.vue'),
