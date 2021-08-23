@@ -48,11 +48,12 @@
           rel <input v-model.number="weight.rel" type="number" step="0.1" />
         </label>
         <label>
-          srel <input v-model.lazy.number="weight.srel" step="0.1" />
+          srel
+          (signed&nbsp;normal)
+          <input v-model.lazy.number="weight.srel" step="0.1" />
         </label>
         <label v-show="!weight.bounded">
-          adust range
-          <input @click="weight.rescale" type="button" value="scale" />
+          <input @click="weight.rescale" type="button" value="scale range" />
         </label>
       </div>
       <div>

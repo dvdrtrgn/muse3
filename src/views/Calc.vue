@@ -8,16 +8,23 @@
 <style lang="scss">
   .tidy {
     border: 1px solid silver;
-    h2,
-    h3,
-    label {
-      display: inline-block;
+    padding: 1rem;
+
+    h2, h3, label {
       margin: 0.5rem;
     }
     input[type='number'] {
       font-size: 1.5rem;
       text-align: center;
       width: 3em;
+    }
+    label {
+      display: inline-block;
+      width: min-content
+    }
+
+    .full {
+      display: block;
     }
   }
 
