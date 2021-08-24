@@ -5,8 +5,8 @@
   <table>
     <tr>
       <th></th>
-      <td>Distance (miles) <input class="editable" v-model="distance" /></td>
-      <td>Price per gallon $ <input class="editable" v-model="price" /></td>
+      <td>Distance (miles) <input class="number" v-model="distance" /></td>
+      <td>Price per gallon $ <input class="number" v-model="price" /></td>
     </tr>
   </table>
 
@@ -22,14 +22,14 @@
     <tr>
       <th>Old car</th>
       <td>
-        <input class="editable" v-model="carA1" /> mpg
+        <input class="number" v-model="carA1" /> mpg
         <br />
         <span>${{ costAtPer(carA1).toFixed(2) }}</span>
         <i> / {{ gallons(carA1).toFixed(1) }}gal</i>
         <h6>{{ (1 / carA1).toFixed(3) }}gpm</h6>
       </td>
       <td>
-        <input class="editable" v-model="carB1" /> mpg
+        <input class="number" v-model="carB1" /> mpg
         <br />
         <span>${{ costAtPer(carB1).toFixed(2) }}</span>
         <i> / {{ gallons(carB1).toFixed(1) }}gal</i>
@@ -39,14 +39,14 @@
     <tr>
       <th>New car</th>
       <td>
-        <input class="editable" v-model="carA2" /> mpg
+        <input class="number" v-model="carA2" /> mpg
         <br />
         <span>${{ costAtPer(carA2).toFixed(2) }}</span>
         <i> / {{ gallons(carA2).toFixed(1) }}gal</i>
         <h6>{{ (1 / carA2).toFixed(3) }}gpm</h6>
       </td>
       <td>
-        <input class="editable" v-model="carB2" /> mpg
+        <input class="number" v-model="carB2" /> mpg
         <br />
         <span>${{ costAtPer(carB2).toFixed(2) }}</span>
         <i> / {{ gallons(carB2).toFixed(1) }}gal</i>
@@ -170,15 +170,6 @@
     }
     h6 {
       margin: 0;
-    }
-
-    .editable {
-      background: white;
-      box-shadow: 0 0 0.2em grey;
-      border: 0;
-      border-radius: 0.2em;
-      line-height: 1;
-      padding: 0.2em 0.3em 0;
     }
   }
 </style>

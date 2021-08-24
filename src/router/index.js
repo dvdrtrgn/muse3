@@ -21,7 +21,7 @@ const routes = [
         path: 'Percents',
         name: 'Percents',
         meta: {
-          title: 'The Counter Intuitive Percent',
+          title: 'The Elusive Percent',
         },
         component: () =>
           import(/* webpackChunkName: "Percents" */ '../views/calc/Percents.vue'),

@@ -5,7 +5,7 @@
       Wind can only help going one way.
       Consider these variables...
       <br> distance {{ distance }} / speed {{ topSpeed }}
-      <br> {{ distance / topSpeed }} hours (Both ways: x2)
+      <br> {{ distance / topSpeed }} hours (one way)
     </p>
 
     <h2 class="full">
@@ -34,9 +34,9 @@
 
     <hr>
 
-    <h2 class="full">
+    <h3 class="full">
       Increased by: <b>{{ (timeTotal - timeNormal).toLocaleString() }}</b>&nbsp;hours
-    </h2>
+    </h3>
     <p>
       <span v-if="!played">
         Try a wind speed close to the top speed! <br />
@@ -57,7 +57,7 @@
       return {
         wind: 50,
         topSpeed: 250,
-        distance: 500,
+        distance: 1500,
         played: 0,
       };
     },

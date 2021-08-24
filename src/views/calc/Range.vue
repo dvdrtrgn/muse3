@@ -116,10 +116,6 @@
 
 <style lang="scss">
   #Range {
-    .flex {
-      display: flex;
-      justify-content: center;
-    }
     .lined {
       justify-content: space-around;
       > * {
