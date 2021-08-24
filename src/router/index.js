@@ -18,6 +18,15 @@ const routes = [
     },
     children: [
       {
+        path: 'Percents',
+        name: 'Percents',
+        meta: {
+          title: 'The Counter Intuitive Percent',
+        },
+        component: () =>
+          import(/* webpackChunkName: "Percents" */ '../views/calc/Percents.vue'),
+      },
+      {
         path: 'velo',
         name: 'Velo',
         meta: {
