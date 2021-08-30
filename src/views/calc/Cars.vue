@@ -109,7 +109,7 @@
       <td colspan="2">
         {{ Math.abs(pctDiff).toFixed(0) }}% improvement difference <br />
         <small>(relative fuel reduction)</small> <br />
-        <small>Difference [B-A] divided by average [(A+B)/2]</small>
+        <small>GPM difference [B-A] divided by average [(A+B)/2]</small>
       </td>
     </tr>
   </table>
@@ -117,7 +117,7 @@
   <hr />
   <h3>Small improvements to low efficiencies can pay off!</h3>
   <p>
-    A would need over 66mpg to get what B gets at 10mpg.
+    “A” would need over 66mpg to get what “B” gets at 10mpg.
   </p>
 
   <CarSvg />
