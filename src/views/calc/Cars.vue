@@ -5,15 +5,26 @@
   <table>
     <tr>
       <th></th>
-      <td>Distance (miles) <input class="number" v-model="distance" /></td>
-      <td>Price per gallon $ <input class="number" v-model="price" /></td>
+      <td>
+        Distance (miles)
+        <input class="number" type="number" v-model="distance" />
+      </td>
+      <td>
+        Price per gallon $
+        <input class="number" type="number" v-model="price" />
+      </td>
     </tr>
   </table>
 
-  <hr />
   <h3>Compare two owners who upgrade their&nbsp;cars...</h3>
+
   <table>
-    <tr></tr>
+    <tr>
+      <td></td>
+      <td colspan="2">
+        <CarsABsvg :diff="pctDiff" />
+      </td>
+    </tr>
     <tr>
       <th></th>
       <th>Owner A</th>
@@ -22,72 +33,83 @@
     <tr>
       <th>Old car</th>
       <td>
-        <input class="number" v-model="carA1" /> mpg
+        <input class="number" type="number" v-model="Aold" disabled /> mpg
         <br />
-        <span>${{ costAtPer(carA1).toFixed(2) }}</span>
-        <i> / {{ gallons(carA1).toFixed(1) }}gal</i>
-        <h6>{{ (1 / carA1).toFixed(3) }}gpm</h6>
+        <i> {{ gallons(Aold).toFixed(1) }}gal </i>
+        <small> (${{ costAtPer(Aold).toFixed(2) }}) </small>
+        <h6>{{ (1 / Aold).toFixed(3) }}gpm</h6>
       </td>
       <td>
-        <input class="number" v-model="carB1" /> mpg
+        <input class="number" type="number" v-model="Bold" disabled /> mpg
         <br />
-        <span>${{ costAtPer(carB1).toFixed(2) }}</span>
-        <i> / {{ gallons(carB1).toFixed(1) }}gal</i>
-        <h6>{{ (1 / carB1).toFixed(3) }}gpm</h6>
+        <i> {{ gallons(Bold).toFixed(1) }}gal </i>
+        <small> (${{ costAtPer(Bold).toFixed(2) }}) </small>
+        <h6>{{ (1 / Bold).toFixed(3) }}gpm</h6>
       </td>
     </tr>
     <tr>
       <th>New car</th>
       <td>
-        <input class="number" v-model="carA2" /> mpg
+        <input class="number" type="number" v-model="Anew" /> mpg
         <br />
-        <span>${{ costAtPer(carA2).toFixed(2) }}</span>
-        <i> / {{ gallons(carA2).toFixed(1) }}gal</i>
-        <h6>{{ (1 / carA2).toFixed(3) }}gpm</h6>
+        <i> {{ gallons(Anew).toFixed(1) }}gal</i>
+        <small> (${{ costAtPer(Anew).toFixed(2) }}) </small>
+        <h6>{{ (1 / Anew).toFixed(3) }}gpm</h6>
       </td>
       <td>
-        <input class="number" v-model="carB2" /> mpg
+        <input class="number" type="number" v-model="Bnew" /> mpg
         <br />
-        <span>${{ costAtPer(carB2).toFixed(2) }}</span>
-        <i> / {{ gallons(carB2).toFixed(1) }}gal</i>
-        <h6>{{ (1 / carB2).toFixed(3) }}gpm</h6>
+        <i> {{ gallons(Bnew).toFixed(1) }}gal</i>
+        <small> (${{ costAtPer(Bnew).toFixed(2) }}) </small>
+        <h6>{{ (1 / Bnew).toFixed(3) }}gpm</h6>
       </td>
     </tr>
     <tr>
       <th>Savings</th>
       <td>
-        <span> ${{ compareCost(carA1, carA2).toFixed(2) }} </span>
-        <i> / {{ compareGals(carA1, carA2).toFixed(1) }}gal </i>
+        <i> {{ compareGals(Aold, Anew).toFixed(1) }}gal </i>
+        <small> (${{ compareCost(Anew, Aold).toFixed(2) }}) </small>
       </td>
       <td>
-        <span> ${{ compareCost(carB1, carB2).toFixed(2) }} </span>
-        <i> / {{ compareGals(carB1, carB2).toFixed(1) }}gal </i>
-      </td>
-    </tr>
-    <tr>
-      <th>Efficiency<br />improvement</th>
-      <td>
-        <span>{{ percentDiff(carA1, carA2).toFixed(0) }}%</span>
-        <br />
-        <i>({{ carA2 }} / {{ carA1 }})</i>
-      </td>
-      <td>
-        <span>{{ percentDiff(carB1, carB2).toFixed(0) }}%</span>
-        <br />
-        <i>({{ carB2 }} / {{ carB1 }})</i>
+        <i> {{ compareGals(Bold, Bnew).toFixed(1) }}gal </i>
+        <small> (${{ compareCost(Bnew, Bold).toFixed(2) }}) </small>
       </td>
     </tr>
     <tr>
-      <th>GPM<br />difference</th>
+      <th>Efficiency<br />increase</th>
       <td>
-        <span>{{ (1 / carA1 - 1 / carA2).toFixed(3) }}</span>
+        <span>{{ percentDiff(Aold, Anew).toFixed(0) }}%</span>
         <br />
-        <h6>1/{{ carA1 }} – 1/{{ carA2 }}</h6>
+        <small>({{ Anew }} / {{ Aold }})</small>
       </td>
       <td>
-        <span>{{ (1 / carB1 - 1 / carB2).toFixed(3) }}</span>
+        <span>{{ percentDiff(Bold, Bnew).toFixed(0) }}%</span>
         <br />
-        <h6>1/{{ carB1 }} – 1/{{ carB2 }}</h6>
+        <small>({{ Bnew }} / {{ Bold }})</small>
+      </td>
+    </tr>
+    <tr>
+      <th>GPM<br />improvement</th>
+      <td>
+        <span>{{ carA_gpm.toFixed(2) }}%</span>
+        <br />
+        <small>(1/{{ Aold }} – 1/{{ Anew }})</small>
+      </td>
+      <td>
+        <span>{{ carB_gpm.toFixed(2) }}%</span>
+        <br />
+        <small>(1/{{ Bold }} – 1/{{ Bnew }})</small>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Who saves? <br />
+        {{ winner ? winner + ' wins!' : 'Tie' }}
+      </th>
+      <td colspan="2">
+        {{ Math.abs(pctDiff).toFixed(0) }}% improvement difference <br />
+        <small>(relative fuel reduction)</small> <br />
+        <small>Difference [B-A] divided by average [(A+B)/2]</small>
       </td>
     </tr>
   </table>
@@ -95,20 +117,25 @@
   <hr />
   <h3>Small improvements to low efficiencies can pay off!</h3>
   <p>
-    Owner A’s new car would need over 66mpg to get the same payoff.
+    A would need over 66mpg to get what B gets at 10mpg.
   </p>
+
+  <CarSvg />
 </template>
 
 <script>
+  import CarSvg from './components/CarSvg.vue';
+  import CarsABsvg from './components/CarsABsvg.vue';
+
   export default {
     name: 'Cars',
-    components: {},
+    components: { CarSvg, CarsABsvg },
     data() {
       return {
-        carA1: 25,
-        carA2: 35,
-        carB1: 8,
-        carB2: 10,
+        Aold: 25,
+        Anew: 35,
+        Bold: 8,
+        Bnew: 10,
         distance: 10,
         price: 1,
       };
@@ -131,17 +158,28 @@
       },
     },
     computed: {
-      leftDiff() {
-        return this.carA2 - this.carA1;
+      carA_gpm() {
+        return (1 / this.Aold - 1 / this.Anew) * 100;
       },
-      rightDiff() {
-        return this.carB2 - this.carB1;
+      carB_gpm() {
+        return (1 / this.Bold - 1 / this.Bnew) * 100;
       },
-      stats() {
-        return {
-          distance: this.distance,
-          price: this.price,
-        };
+      pctDiff() {
+        let dif = this.carB_gpm - this.carA_gpm;
+        let avg = (this.carB_gpm + this.carA_gpm) / 2;
+        return Math.round((dif / avg) * 100) || 0;
+      },
+      winner() {
+        if (!this.pctDiff) return '';
+        return this.pctDiff > 0 ? 'B' : 'A';
+      },
+    },
+    watch: {
+      Anew() {
+        if (this.Anew < this.Aold) this.Anew = this.Aold;
+      },
+      Bnew() {
+        if (this.Bnew < this.Bold) this.Bnew = this.Bold;
       },
     },
   };
@@ -166,7 +204,6 @@
     input {
       font-size: 1rem;
       text-align: right;
-      width: 2em;
     }
     h6 {
       margin: 0;
