@@ -1,12 +1,12 @@
 //in vue.config.js file
-// let out = 'playtime';
-let dist = 'dist'; // default: dist
+let out = 'vuebox/';
+let dist = 'dist/'; // default: dist
 
 module.exports = {
   /* only sets name of "distribution" folder */
-  // outputDir: out,
+  outputDir: `${dist}${out}`,
   /* only rewrites pathname in "production" mode */
-  publicPath: process.env.NODE_ENV === 'production' ? `/${dist}/` : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? `/${dist}` : `/${out}`,
   // Reduce minification
   chainWebpack: (config) => {
     config.optimization.minimize(false);

@@ -1,7 +1,16 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from 'vue-router';
 import Home from '../views/Home.vue';
 import Calc from '../views/Calc.vue';
 import Wip from '../views/Wip.vue';
+
+const MODE =
+  process.env.NODE_ENV === 'production'
+    ? createWebHistory
+    : createWebHashHistory;
 
 const routes = [
   {
@@ -10,7 +19,7 @@ const routes = [
     component: Home,
   },
   /* calc */ {
-    path: '/calc',
+    path: '/Calc',
     name: 'Calc',
     component: Calc,
     meta: {
@@ -24,10 +33,12 @@ const routes = [
           title: 'The Elusive Percent',
         },
         component: () =>
-          import(/* webpackChunkName: "Percents" */ '../views/calc/Percents.vue'),
+          import(
+            /* webpackChunkName: "Percents" */ '../views/calc/Percents.vue'
+          ),
       },
       {
-        path: 'velo',
+        path: 'Velo',
         name: 'Velo',
         meta: {
           title: 'The Counter Intuitive Flight',
@@ -36,7 +47,7 @@ const routes = [
           import(/* webpackChunkName: "Velo" */ '../views/calc/Velo.vue'),
       },
       {
-        path: 'tomato',
+        path: 'Tomato',
         name: 'Tomato',
         meta: {
           title: 'The Counter Intuitive Tomato',
@@ -45,7 +56,7 @@ const routes = [
           import(/* webpackChunkName: "Tomato" */ '../views/calc/Tomato.vue'),
       },
       {
-        path: 'cars',
+        path: 'Cars',
         name: 'Cars',
         meta: {
           title: 'The Counter Intuitive Cars',
@@ -54,7 +65,7 @@ const routes = [
           import(/* webpackChunkName: "Cars" */ '../views/calc/Cars.vue'),
       },
       {
-        path: 'range',
+        path: 'Range',
         name: 'Range',
         component: () =>
           import(/* webpackChunkName: "Range" */ '../views/calc/Range.vue'),
@@ -62,7 +73,7 @@ const routes = [
     ],
   },
   /* wip */ {
-    path: '/wip',
+    path: '/Wip',
     name: 'Wip',
     component: Wip,
     meta: {
@@ -70,13 +81,13 @@ const routes = [
     },
     children: [
       {
-        path: 'matrix',
+        path: 'Matrix',
         name: 'Matrix',
         meta: {
           title: 'The Freaky Matrix',
         },
         component: () =>
-          import(/* webpackChunkName: "matrix" */ '../views/calc/Matrix.vue'),
+          import(/* webpackChunkName: "Matrix" */ '../views/calc/Matrix.vue'),
       },
       {
         path: 'vmail',
@@ -85,20 +96,20 @@ const routes = [
           title: 'Forge Vmail',
         },
         component: () =>
-          import(/* webpackChunkName: "vmail" */ '../views/mail/Vmail.vue'),
+          import(/* webpackChunkName: "Vmail" */ '../views/mail/Vmail.vue'),
       },
     ],
   },
   {
-    path: '/about',
+    path: '/About',
     name: 'About',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue'),
+      import(/* webpackChunkName: "About" */ '../views/About.vue'),
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: MODE(process.env.BASE_URL),
   routes,
 });
 
