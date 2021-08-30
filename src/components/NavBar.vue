@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import { defineComponent } from "vue";
+  import { defineComponent } from 'vue';
 
   export default defineComponent({
     computed: {
@@ -62,25 +62,29 @@
           border-right: 0;
         }
 
-        a.router-link-active + ul {
-          display: block;
-        }
         // NESTED
+        @mixin fadein($z: inherit) {
+          opacity: 1;
+          pointer-events: all;
+          z-index: $z;
+        }
+        a.router-link-active + ul {
+          @include fadein;
+        }
         a:hover + ul {
-          display: block;
-          z-index: 1;
+          @include fadein(1);
         }
         ul {
-          display: none;
+          opacity: 0;
+          pointer-events: none;
           position: absolute;
+          transition: opacity 1s;
           width: 100%;
           &:hover {
-            display: block;
-            z-index: 2;
+            @include fadein(2);
           }
         }
       }
     }
   }
-
 </style>
