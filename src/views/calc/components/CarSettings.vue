@@ -6,11 +6,11 @@
         <input type="checkbox" v-model="metric" />
       </th>
       <td>
-        Distance (miles)
+        Distance ({{ key.unitD }})
         <input class="number" type="number" v-model="distance" />
       </td>
       <td>
-        Price per gallon $
+        Price per ({{ key.unitF }}) $
         <input class="number" type="number" v-model="price" />
       </td>
     </tr>
