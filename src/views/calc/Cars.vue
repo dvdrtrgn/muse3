@@ -1,21 +1,7 @@
 <template>
   <h1>Compare Efficiencies</h1>
-
   <h2>Adjust distance and price&nbsp;settings:</h2>
-  <table>
-    <tr>
-      <th></th>
-      <td>
-        Distance (miles)
-        <input class="number" type="number" v-model="distance" />
-      </td>
-      <td>
-        Price per gallon $
-        <input class="number" type="number" v-model="price" />
-      </td>
-    </tr>
-  </table>
-
+  <CarSettings fromParent="distance,price,metric" />
   <h3>Compare two owners who upgrade their&nbsp;cars...</h3>
 
   <table>
@@ -114,22 +100,17 @@
     </tr>
   </table>
 
-  <hr />
-  <h3>Small improvements to low efficiencies can pay off!</h3>
-  <p>
-    “A” would need over 66mpg to get what “B” gets at 10mpg.
-  </p>
-
-  <CarSvg />
+  <CarFooter />
 </template>
 
 <script>
-  import CarSvg from './components/CarSvg.vue';
+  import CarSettings from './components/CarSettings.vue';
+  import CarFooter from './components/CarFooter.vue';
   import CarsABsvg from './components/CarsABsvg.vue';
 
   export default {
     name: 'Cars',
-    components: { CarSvg, CarsABsvg },
+    components: { CarsABsvg, CarSettings, CarFooter },
     data() {
       return {
         Aold: 25,
@@ -138,6 +119,7 @@
         Bnew: 10,
         distance: 10,
         price: 1,
+        metric: false,
       };
     },
     methods: {
@@ -181,6 +163,9 @@
       Bnew() {
         if (this.Bnew < this.Bold) this.Bnew = this.Bold;
       },
+      metric() {
+        console.log('this.metric', this.metric);
+      }
     },
   };
 </script>
