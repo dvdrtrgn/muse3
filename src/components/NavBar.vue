@@ -50,7 +50,7 @@
       padding: 0;
       position: relative;
 
-      :hover a {
+      :hover > a {
         color: #911c1c;
       }
 
@@ -71,14 +71,14 @@
         a.router-link-active + ul {
           @include fadein;
         }
-        a:hover + ul {
+        &:hover > ul {
           @include fadein(1);
         }
         ul {
           opacity: 0;
           pointer-events: none;
           position: absolute;
-          transition: opacity 1s;
+          transition: opacity 1s, z-index 3s;
           width: 100%;
           &:hover {
             @include fadein(2);
