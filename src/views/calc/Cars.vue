@@ -1,12 +1,12 @@
 <template>
   <h1>Compare Efficiencies</h1>
   <h2>Adjust distance and price&nbsp;settings:</h2>
-  <CarSettings fromParent="distance,price,metric,key" />
   <h3>Compare two drivers who upgrade their&nbsp;cars...</h3>
   <p>
     Bill needs over 66 {{ key.dpf }} to match what Sarah saves at 10
     {{ key.dpf }}.
   </p>
+  <CarSettings fromParent="distance,price,metric,key" />
 
   <table>
     <tr>
@@ -121,6 +121,8 @@
   import CarSettings from './components/CarSettings.vue';
   import CarFooter from './components/CarFooter.vue';
   import CarsABsvg from './components/CarsABsvg.vue';
+  import CarUpgrade from './libs/CarUpgrade.js';
+  window.CarUpgrade = CarUpgrade;
 
   export default {
     name: 'Cars',
