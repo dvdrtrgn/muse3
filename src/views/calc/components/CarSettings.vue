@@ -6,11 +6,11 @@
         <input type="checkbox" v-model="metric" />
       </th>
       <td>
-        Distance ({{ key.unitD }})
+        Distance ({{ keys.unitD }})
         <input class="number" type="number" v-model="distance" />
       </td>
       <td>
-        Price per ({{ key.unitF }}) $
+        Price per ({{ keys.unitF }}) $
         <input class="number" type="number" v-model="price" />
       </td>
     </tr>

@@ -15,10 +15,27 @@ class Car {
   fuelFor(distance) {
     return this.fpd * distance;
   }
-  costToTravel(distance, costPer) {
-    return this.fuelFor(distance) * costPer;
+  costPer(fuelPrice) {
+    return this.fpd * fuelPrice;
+  }
+  costToTravel(distance, fuelPrice) {
+    return this.fuelFor(distance) * fuelPrice;
   }
 }
+
+// class CarInContext {
+//   constructor() {}
+//   set context(obj) {
+//     this._ctx = obj;
+//   }
+//   get context() {
+//     this._ctx = this._ctx || {};
+//     return this._ctx;
+//   }
+//   seekcontext(nom) {
+//     return this[nom] || this.context[nom];
+//   }
+// }
 
 export default class CarUpgrade {
   // efficiency is efficiency (MPG or Dist/Fuel DPF)
@@ -65,6 +82,13 @@ export default class CarUpgrade {
   }
   get newFuelPer100() {
     return this.newFPD * 100;
+  }
+
+  get oldCostPer() {
+    return this.old.costPer(this.price);
+  }
+  get newCostPer() {
+    return this.new.costPer(this.price);
   }
 
   get moneySaved() {
