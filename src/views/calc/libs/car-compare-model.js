@@ -1,47 +1,24 @@
 import { reactive } from 'vue';
+import CarEff from './car-efficiency.js';
 
 export default reactive({
-  A1: 25,
-  A2: 35,
-  B1: 8,
-  B2: 10,
+  A1: new CarEff(25),
+  A2: new CarEff(35),
+  B1: new CarEff(8),
+  B2: new CarEff(10),
   distance: 1400,
   price: '3.50',
-  get a1_eff() {
-    return this.A1;
+  fuelUsed(car) {
+    return this.distance * car.efi;
   },
-  get a1_eff_inv() {
-    return 1 / this.A1;
-  },
-  get a2_eff() {
-    return this.A2;
-  },
-  get a2_eff_inv() {
-    return 1 / this.A2;
-  },
-  get b1_eff() {
-    return this.B1;
-  },
-  get b1_eff_inv() {
-    return 1 / this.B1;
-  },
-  get b2_eff() {
-    return this.B2;
-  },
-  get b2_eff_inv() {
-    return 1 / this.B2;
-  },
-  costAt(dpf) {
-    return this.fuelUsed(dpf) * this.price;
+  costAt(car) {
+    return this.fuelUsed(car) * this.price;
   },
   fuelReduction(a, b) {
     return this.fuelUsed(a) - this.fuelUsed(b);
   },
   moneySaved(a, b) {
     return this.costAt(b) - this.costAt(a);
-  },
-  fuelUsed(dpf) {
-    return this.distance / dpf;
   },
   calc_eff_inc(v1, v2) {
     return (v2 / v1) * 100 - 100;
@@ -59,7 +36,6 @@ export default reactive({
     return Math.abs(this.ab_pct_diff());
   },
 });
-
 
 function changePct(vold, vnew) {
   return (1 / vold - 1 / vnew) * 100;

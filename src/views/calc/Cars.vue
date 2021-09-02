@@ -35,18 +35,18 @@
         >
       </th>
       <td>
-        <input class="number" type="number" v-model.number="A1" disabled />
+        <input class="number" type="number" v-model.number="A1.eff" disabled />
         {{ keys.dpf }}
         <br />
-        <h6>{{ a1_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <h6>{{ A1.efi.toFixed(3) }} {{ keys.fpd }}</h6>
         <i> {{ fuelUsed(A1).toFixed(1) }} {{ keys.unitF }} </i>
         <small> (${{ costAt(A1).toFixed(2) }}) </small>
       </td>
       <td>
-        <input class="number" type="number" v-model.number="B1" disabled />
+        <input class="number" type="number" v-model.number="B1.eff" disabled />
         {{ keys.dpf }}
         <br />
-        <h6>{{ b1_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <h6>{{ B1.efi.toFixed(3) }} {{ keys.fpd }}</h6>
         <i> {{ fuelUsed(B1).toFixed(1) }} {{ keys.unitF }} </i>
         <small> (${{ costAt(B1).toFixed(2) }}) </small>
       </td>
@@ -60,18 +60,18 @@
         >
       </th>
       <td>
-        <input class="number" type="number" v-model.number="A2" />
+        <input class="number" type="number" v-model.number="A2.eff" />
         {{ keys.dpf }}
         <br />
-        <h6>{{ a2_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <h6>{{ A2.efi.toFixed(3) }} {{ keys.fpd }}</h6>
         <i> {{ fuelUsed(A2).toFixed(2) }} {{ keys.unitF }}</i>
         <small> (${{ costAt(A2).toFixed(2) }}) </small>
       </td>
       <td>
-        <input class="number" type="number" v-model.number="B2" />
+        <input class="number" type="number" v-model.number="B2.eff" />
         {{ keys.dpf }}
         <br />
-        <h6>{{ b2_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <h6>{{ B2.efi.toFixed(3) }} {{ keys.fpd }}</h6>
         <i> {{ fuelUsed(B2).toFixed(2) }} {{ keys.unitF }}</i>
         <small> (${{ costAt(B2).toFixed(2) }}) </small>
       </td>
@@ -92,12 +92,12 @@
       <td>
         <span>{{ calc_eff_inc(A1, A2).toFixed(0) }}%</span>
         <br />
-        <small>({{ A2 }} / {{ A1 }})</small>
+        <small>({{ A2.eff }} / {{ A1.eff }})</small>
       </td>
       <td>
         <span>{{ calc_eff_inc(B1, B2).toFixed(0) }}%</span>
         <br />
-        <small>({{ B2 }} / {{ B1 }})</small>
+        <small>({{ B2.eff }} / {{ B1.eff }})</small>
       </td>
     </tr>
     <tr>
@@ -105,12 +105,12 @@
       <td>
         <span>{{ a_fpd_imp().toFixed(2) }}%</span>
         <br />
-        <small>(1/{{ A1 }} – 1/{{ A2 }})</small>
+        <small>(1/{{ A1.eff }} – 1/{{ A2.eff }})</small>
       </td>
       <td>
         <span>{{ b_fpd_imp().toFixed(2) }}%</span>
         <br />
-        <small>(1/{{ B1 }} – 1/{{ B2 }})</small>
+        <small>(1/{{ B1.eff }} – 1/{{ B2.eff }})</small>
       </td>
     </tr>
     <tr>
@@ -165,16 +165,16 @@
     },
     watch: {
       A1() {
-        this.A1 = keepLessThan(this.A1, this.A2);
+        this.A1.eff = keepLessThan(this.A1, this.A2);
       },
       B1() {
-        this.B1 = keepLessThan(this.B1, this.B2);
+        this.B1.eff = keepLessThan(this.B1, this.B2);
       },
       A2() {
-        this.A2 = keepMoreThan(this.A2, this.A1);
+        this.A2.eff = keepMoreThan(this.A2, this.A1);
       },
       B2() {
-        this.B2 = keepMoreThan(this.B2, this.B1);
+        this.B2.eff = keepMoreThan(this.B2, this.B1);
       },
     },
   };
