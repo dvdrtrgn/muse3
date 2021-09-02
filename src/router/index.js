@@ -1,3 +1,8 @@
+const MODE =
+  process.env.NODE_ENV === 'production'
+    ? createWebHistory
+    : createWebHashHistory;
+
 import {
   createRouter,
   createWebHistory,
@@ -6,11 +11,6 @@ import {
 import Home from '../views/Home.vue';
 import Calc from '../views/Calc.vue';
 import Wip from '../views/Wip.vue';
-
-const MODE =
-  process.env.NODE_ENV === 'production'
-    ? createWebHistory
-    : createWebHashHistory;
 
 const routes = [
   {
