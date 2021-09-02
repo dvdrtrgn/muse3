@@ -7,11 +7,11 @@
       </th>
       <td>
         Distance ({{ keys.unitD }})
-        <input class="number" type="number" v-model="distance" />
+        <input class="number" type="number" v-model.number="distance" />
       </td>
       <td>
         Price per ({{ keys.unitF }}) $
-        <input class="number" type="number" v-model="price" />
+        <input class="number" type="number" v-model.number="price" />
       </td>
     </tr>
   </table>

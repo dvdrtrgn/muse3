@@ -35,7 +35,7 @@
         >
       </th>
       <td>
-        <input class="number" type="number" v-model="Aold" disabled />
+        <input class="number" type="number" v-model.number="Aold" disabled />
         {{ keys.dpf }}
         <br />
         <h6>{{ (1 / Aold).toFixed(3) }} {{ keys.fpd }}</h6>
@@ -43,7 +43,7 @@
         <small> (${{ costAt(Aold).toFixed(2) }}) </small>
       </td>
       <td>
-        <input class="number" type="number" v-model="Bold" disabled />
+        <input class="number" type="number" v-model.number="Bold" disabled />
         {{ keys.dpf }}
         <br />
         <div>{{ (1 / Bold).toFixed(3) }} {{ keys.fpd }}</div>
@@ -60,14 +60,16 @@
         >
       </th>
       <td>
-        <input class="number" type="number" v-model="Anew" /> {{ keys.dpf }}
+        <input class="number" type="number" v-model.number="Anew" />
+        {{ keys.dpf }}
         <br />
         <h6>{{ (1 / Anew).toFixed(3) }} {{ keys.fpd }}</h6>
         <i> {{ fuelUsed(Anew).toFixed(2) }} {{ keys.unitF }}</i>
         <small> (${{ costAt(Anew).toFixed(2) }}) </small>
       </td>
       <td>
-        <input class="number" type="number" v-model="Bnew" /> {{ keys.dpf }}
+        <input class="number" type="number" v-model.number="Bnew" />
+        {{ keys.dpf }}
         <br />
         <h6>{{ (1 / Bnew).toFixed(3) }} {{ keys.fpd }}</h6>
         <i> {{ fuelUsed(Bnew).toFixed(2) }} {{ keys.unitF }}</i>

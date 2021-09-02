@@ -1,6 +1,6 @@
 <template>
-  <div id="ABwrap">
-    <svg viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
+  <div id="ABwrap" :style="cssVars">
+    <svg viewBox="0 0 500 120">
       <CarSvg :id="`${diff > 0 ? 'A1' : 'B1'}`" />
       <CarSvg :id="`${diff > 0 ? 'B1' : 'A1'}`" />
     </svg>
@@ -18,21 +18,31 @@
       return {};
     },
     methods: {},
-    computed: {},
+    computed: {
+      cssVars() {
+        let size = (this.diff / -400) + 1;
+        return `--size: ${size};` ;
+      },
+    },
   };
 </script>
 
 <style lang="scss">
   #ABwrap {
+    --sizeA: calc(var(--size));
+    --sizeB1: calc(-1 / var(--size));
+    --sizeB2: calc(1 / var(--size));
     background-color: wheat;
+    svg {
+      overflow: visible;
+    }
   }
   #Car_A1 {
     fill: blue;
-    transform: matrix(1, 0, 0, 1, -100, 10);
+    transform: matrix(var(--sizeA), 0, 0, var(--sizeA), -100, 10);
   }
   #Car_B1 {
     fill: red;
-    transform: matrix(-1, 0, 0, 1, +100, 10);
-    z-index: var(--foo);
+    transform: matrix(var(--sizeB1), 0, 0, var(--sizeB2), +100, 10);
   }
 </style>
