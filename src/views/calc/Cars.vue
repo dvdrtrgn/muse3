@@ -35,20 +35,20 @@
         >
       </th>
       <td>
-        <input class="number" type="number" v-model.number="Aold" disabled />
+        <input class="number" type="number" v-model.number="A1" disabled />
         {{ keys.dpf }}
         <br />
-        <h6>{{ (1 / Aold).toFixed(3) }} {{ keys.fpd }}</h6>
-        <i> {{ fuelUsed(Aold).toFixed(1) }} {{ keys.unitF }} </i>
-        <small> (${{ costAt(Aold).toFixed(2) }}) </small>
+        <h6>{{ a1_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <i> {{ fuelUsed(A1).toFixed(1) }} {{ keys.unitF }} </i>
+        <small> (${{ costAt(A1).toFixed(2) }}) </small>
       </td>
       <td>
-        <input class="number" type="number" v-model.number="Bold" disabled />
+        <input class="number" type="number" v-model.number="B1" disabled />
         {{ keys.dpf }}
         <br />
-        <div>{{ (1 / Bold).toFixed(3) }} {{ keys.fpd }}</div>
-        <i> {{ fuelUsed(Bold).toFixed(1) }} {{ keys.unitF }} </i>
-        <small> (${{ costAt(Bold).toFixed(2) }}) </small>
+        <h6>{{ b1_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <i> {{ fuelUsed(B1).toFixed(1) }} {{ keys.unitF }} </i>
+        <small> (${{ costAt(B1).toFixed(2) }}) </small>
       </td>
     </tr>
     <tr>
@@ -60,44 +60,44 @@
         >
       </th>
       <td>
-        <input class="number" type="number" v-model.number="Anew" />
+        <input class="number" type="number" v-model.number="A2" />
         {{ keys.dpf }}
         <br />
-        <h6>{{ (1 / Anew).toFixed(3) }} {{ keys.fpd }}</h6>
-        <i> {{ fuelUsed(Anew).toFixed(2) }} {{ keys.unitF }}</i>
-        <small> (${{ costAt(Anew).toFixed(2) }}) </small>
+        <h6>{{ a2_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <i> {{ fuelUsed(A2).toFixed(2) }} {{ keys.unitF }}</i>
+        <small> (${{ costAt(A2).toFixed(2) }}) </small>
       </td>
       <td>
-        <input class="number" type="number" v-model.number="Bnew" />
+        <input class="number" type="number" v-model.number="B2" />
         {{ keys.dpf }}
         <br />
-        <h6>{{ (1 / Bnew).toFixed(3) }} {{ keys.fpd }}</h6>
-        <i> {{ fuelUsed(Bnew).toFixed(2) }} {{ keys.unitF }}</i>
-        <small> (${{ costAt(Bnew).toFixed(2) }}) </small>
+        <h6>{{ b2_eff_inv.toFixed(3) }} {{ keys.fpd }}</h6>
+        <i> {{ fuelUsed(B2).toFixed(2) }} {{ keys.unitF }}</i>
+        <small> (${{ costAt(B2).toFixed(2) }}) </small>
       </td>
     </tr>
     <tr>
       <th>Savings</th>
       <td>
-        <i> {{ fuelReduction(Aold, Anew).toFixed(2) }} {{ keys.unitF }} </i>
-        <small> (${{ moneySaved(Anew, Aold).toFixed(2) }}) </small>
+        <i> {{ fuelReduction(A1, A2).toFixed(2) }} {{ keys.unitF }} </i>
+        <small> (${{ moneySaved(A2, A1).toFixed(2) }}) </small>
       </td>
       <td>
-        <i> {{ fuelReduction(Bold, Bnew).toFixed(2) }} {{ keys.unitF }} </i>
-        <small> (${{ moneySaved(Bnew, Bold).toFixed(2) }}) </small>
+        <i> {{ fuelReduction(B1, B2).toFixed(2) }} {{ keys.unitF }} </i>
+        <small> (${{ moneySaved(B2, B1).toFixed(2) }}) </small>
       </td>
     </tr>
     <tr>
       <th>Efficiency<br />increase</th>
       <td>
-        <span>{{ calc_eff_inc(Aold, Anew).toFixed(0) }}%</span>
+        <span>{{ calc_eff_inc(A1, A2).toFixed(0) }}%</span>
         <br />
-        <small>({{ Anew }} / {{ Aold }})</small>
+        <small>({{ A2 }} / {{ A1 }})</small>
       </td>
       <td>
-        <span>{{ calc_eff_inc(Bold, Bnew).toFixed(0) }}%</span>
+        <span>{{ calc_eff_inc(B1, B2).toFixed(0) }}%</span>
         <br />
-        <small>({{ Bnew }} / {{ Bold }})</small>
+        <small>({{ B2 }} / {{ B1 }})</small>
       </td>
     </tr>
     <tr>
@@ -105,12 +105,12 @@
       <td>
         <span>{{ a_fpd_imp().toFixed(2) }}%</span>
         <br />
-        <small>(1/{{ Aold }} – 1/{{ Anew }})</small>
+        <small>(1/{{ A1 }} – 1/{{ A2 }})</small>
       </td>
       <td>
         <span>{{ b_fpd_imp().toFixed(2) }}%</span>
         <br />
-        <small>(1/{{ Bold }} – 1/{{ Bnew }})</small>
+        <small>(1/{{ B1 }} – 1/{{ B2 }})</small>
       </td>
     </tr>
     <tr>
@@ -153,8 +153,8 @@
       keys() {
         return {
           dpf: this.metric ? 'km/L' : 'MPG',
-          fpd: this.metric ? 'L/km' : 'gal/mi',
-          unitF: this.metric ? 'Ltr' : 'gal',
+          fpd: this.metric ? 'L/km' : 'Gal/mi',
+          unitF: this.metric ? 'Ltr' : 'Gal',
           unitD: this.metric ? 'km' : 'mile',
         };
       },
@@ -164,17 +164,17 @@
       },
     },
     watch: {
-      Aold() {
-        this.Aold = keepLessThan(this.Aold, this.Anew);
+      A1() {
+        this.A1 = keepLessThan(this.A1, this.A2);
       },
-      Bold() {
-        this.Bold = keepLessThan(this.Bold, this.Bnew);
+      B1() {
+        this.B1 = keepLessThan(this.B1, this.B2);
       },
-      Anew() {
-        this.Anew = keepMoreThan(this.Anew, this.Aold);
+      A2() {
+        this.A2 = keepMoreThan(this.A2, this.A1);
       },
-      Bnew() {
-        this.Bnew = keepMoreThan(this.Bnew, this.Bold);
+      B2() {
+        this.B2 = keepMoreThan(this.B2, this.B1);
       },
     },
   };
