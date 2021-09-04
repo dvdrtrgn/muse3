@@ -15,12 +15,17 @@
     components: { CarSvg },
     props: ['diff'],
     data() {
-      return {};
+      return {
+        blue: 'steelblue',
+      };
     },
     methods: {},
     computed: {
+      size() {
+        return (this.diff / -400) + 1;
+      },
       cssVars() {
-        let size = (this.diff / -400) + 1;
+        let size = (this.diff / -400) + 1.2;
         return `--size: ${size};` ;
       },
     },
@@ -29,7 +34,7 @@
 
 <style lang="scss">
   #ABwrap {
-    --sizeA: calc(var(--size));
+    --sizeA: v-bind(size);
     --sizeB1: calc(-1 / var(--size));
     --sizeB2: calc(1 / var(--size));
     background-color: wheat;
@@ -38,7 +43,7 @@
     }
   }
   #Car_A1 {
-    fill: blue;
+    fill: v-bind(blue);
     transform: matrix(var(--sizeA), 0, 0, var(--sizeA), -100, 10);
   }
   #Car_B1 {

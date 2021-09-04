@@ -164,17 +164,17 @@
       },
     },
     watch: {
-      A1() {
-        this.A1.eff = keepLessThan(this.A1, this.A2);
+      'A1.eff': function(n, o) {
+        this.A1.eff = n < this.A2 ? n : o;
       },
-      B1() {
-        this.B1.eff = keepLessThan(this.B1, this.B2);
+      'B1.eff': function(n, o) {
+        this.B1.eff = n < this.B2 ? n : o;
       },
-      A2() {
-        this.A2.eff = keepMoreThan(this.A2, this.A1);
+      'A2.eff': function(n, o) {
+        this.A2.eff = n > this.A1 ? n : o;
       },
-      B2() {
-        this.B2.eff = keepMoreThan(this.B2, this.B1);
+      'B2.eff': function(n, o) {
+        this.B2.eff = n > this.B1 ? n : o;
       },
     },
   };
