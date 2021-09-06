@@ -2,7 +2,11 @@
   <p v-if="$route.name == 'Calc'">
     Choose from one of the larks above
   </p>
-  <router-view></router-view>
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
 </template>
 
 <style lang="scss">
@@ -32,7 +36,9 @@
     border: 1px solid silver;
     padding: 1rem;
 
-    h2, h3, label {
+    h2,
+    h3,
+    label {
       margin: 0.5rem;
     }
     input[type='number'] {
@@ -40,7 +46,7 @@
     }
     label {
       display: inline-block;
-      width: min-content
+      width: min-content;
     }
     p {
       margin: 0.5em;
@@ -62,5 +68,4 @@
       flex-wrap: wrap;
     }
   }
-
 </style>
