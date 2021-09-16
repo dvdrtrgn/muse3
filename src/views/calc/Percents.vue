@@ -67,6 +67,14 @@ Multiplier * Multiplicand = Product
       </p>
     </div>
   </div>
+
+  <p>
+    <a
+      target="_blank"
+      href="https://www.indeed.com/career-advice/career-development/how-to-calculate-percentage">
+      How to calculate percentage
+    </a>
+  </p>
 </template>
 
 <script>
