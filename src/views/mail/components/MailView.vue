@@ -22,7 +22,7 @@
 
 <script>
     import { format } from 'date-fns';
-    import marked from 'marked';
+    import { marked } from 'marked';
     import useKeydown from '../composables/useKeydown';
 
     export default {
