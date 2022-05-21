@@ -3,14 +3,16 @@
     <div :id="$route.name">
         <router-view />
     </div>
+    <TeleBtn></TeleBtn>
 </template>
 
 <script>
     import { defineComponent } from 'vue';
     import NavBar from './components/NavBar.vue';
+    import TeleBtn from './components/TeleBtn.vue';
 
     export default defineComponent({
-        components: { NavBar },
+        components: { NavBar, TeleBtn },
         setup() {
             return {};
         },
@@ -22,7 +24,7 @@
     body {
         margin: 0;
     }
-    #app {
+    #App {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         font-family: Avenir, Helvetica, Arial, sans-serif;
