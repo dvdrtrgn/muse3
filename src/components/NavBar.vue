@@ -22,7 +22,7 @@
     export default defineComponent({
         computed: {
             routes() {
-                return this.$router.options.routes;
+                return this.$router.options.routes.filter((e) => e.name !== '404');
             },
         },
     });
