@@ -1,8 +1,8 @@
 <template>
-  <svg class="car_svg" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
-    <g :id="cid">
-      <path
-        d="M 98.5 9.5 L 52.7 12 L 50.9 12 L 37.6 24.7
+    <svg class="car_svg" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
+        <g :id="cid">
+            <path
+                d="M 98.5 9.5 L 52.7 12 L 50.9 12 L 37.6 24.7
 C 10.8 49.8 8.5 52.2 7.8 54.2
 C 7.5 55.2 7.5 57.8 7.6 62.7
 C 8 72.9 9 86 9.4 87.7
@@ -54,23 +54,23 @@ C 205.7 99.1 208.2 99.3 210.1 99.3
 C 214.4 99.3 216.8 98.5 219.9 95.9
 C 225.6 91.2 227.7 85.5 226.6 77.6
 C 225.547 67.459 215.822 60.553 205.9 62.9 Z"
-      ></path>
-    </g>
-  </svg>
+            ></path>
+        </g>
+    </svg>
 </template>
 
 <script>
-  export default {
-    props: ['id'],
-    computed: {
-      cid() {
-        return 'Car_' + this.id;
-      },
-    },
-  };
+    export default {
+        props: ['id'],
+        computed: {
+            cid() {
+                return 'Car_' + this.id;
+            },
+        },
+    };
 </script>
 <style scoped>
-  .car_svg * {
-    transform-origin: center;
-  }
+    .car_svg * {
+        transform-origin: center;
+    }
 </style>

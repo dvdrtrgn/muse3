@@ -1,15 +1,15 @@
 <template>
-  <hr />
+    <hr />
 
-  <h3>Small improvements to low efficiencies can pay off!</h3>
+    <h3>Small improvements to low efficiencies can pay off!</h3>
 
-  <CarSvg />
+    <CarSvg />
 </template>
 
 <script>
-  import CarSvg from './CarSvg.vue';
+    import CarSvg from './CarSvg.vue';
 
-  export default {
-    components: { CarSvg },
-  };
+    export default {
+        components: { CarSvg },
+    };
 </script>

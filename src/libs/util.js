@@ -1,33 +1,33 @@
 import Range from './range.js';
 
 function clamp(val, min, max) {
-  min = min || 0;
-  max = max || 100;
-  return Math.min(max, Math.max(Number(val), min));
+    min = min || 0;
+    max = max || 100;
+    return Math.min(max, Math.max(Number(val), min));
 }
 
 function percentBetween(val, min, max) {
-  min = min || 0;
-  max = max || 100;
-  let delta = max - min;
-  let factor = 100 / delta;
-  return (val - min) * factor;
+    min = min || 0;
+    max = max || 100;
+    let delta = max - min;
+    let factor = 100 / delta;
+    return (val - min) * factor;
 }
 
 function normalize(val, min, max) {
-  min = min || 0;
-  max = max || 1;
-  if (min >= max) throw 'inverted!';
-  let delta = max - min;
-  let factor = 1 / delta;
-  return (val - min) * factor;
+    min = min || 0;
+    max = max || 1;
+    if (min >= max) throw 'inverted!';
+    let delta = max - min;
+    let factor = 1 / delta;
+    return (val - min) * factor;
 }
 
 export default {
-  percentBetween,
-  clamp,
-  normalize,
-  Range,
+    percentBetween,
+    clamp,
+    normalize,
+    Range,
 };
 
 /*

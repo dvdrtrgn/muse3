@@ -1,20 +1,20 @@
 <template>
-  <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <clipPath id="clip-0">
-        <rect x="0" :y="maskTop" width="500" height="500"></rect>
-      </clipPath>
-    </defs>
-    <rect
-      height="500"
-      width="500"
-      id="Border"
-      style="fill-rule: evenodd; fill: rgba(0, 0, 255, 0);"
-    ></rect>
-    <path
-      id="Red"
-      style="fill: rgb(209, 55, 45); clip-path: url('#clip-0');"
-      d="M 322.772 121.697
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <clipPath id="clip-0">
+                <rect x="0" :y="maskTop" width="500" height="500"></rect>
+            </clipPath>
+        </defs>
+        <rect
+            height="500"
+            width="500"
+            id="Border"
+            style="fill-rule: evenodd; fill: rgba(0, 0, 255, 0)"
+        ></rect>
+        <path
+            id="Red"
+            style="fill: rgb(209, 55, 45); clip-path: url('#clip-0')"
+            d="M 322.772 121.697
 C 295.347 134.264 207.606 125.464 176.371 121.222
 C 137.227 117.874 92.815 141.607 57.247 172.229
 C 24.38 200.456 11.589 247.133 15.299 296.195
@@ -23,13 +23,17 @@ C 177.309 486.721 289.651 505.793 372.43 464.152
 C 429.7 435.343 484.206 372.962 487.523 301.392
 C 489.849 251.205 472.979 191.709 431.636 158.091
 C 399.354 131.84 351.194 116.773 322.772 121.697 Z"
-      class="st0"
-    ></path>
-    <path
-      id="RedLine"
-      style="fill: none; stroke: rgb(209, 55, 45); stroke-width: 5px;
-      transform: matrix(1,0,0,1,0,-1)"
-      d="M 322.772 121.697
+            class="st0"
+        ></path>
+        <path
+            id="RedLine"
+            style="
+                fill: none;
+                stroke: rgb(209, 55, 45);
+                stroke-width: 5px;
+                transform: matrix(1, 0, 0, 1, 0, -1);
+            "
+            d="M 322.772 121.697
 C 295.347 134.264 207.606 125.464 176.371 121.222
 C 137.227 117.874 92.815 141.607 57.247 172.229
 C 24.38 200.456 11.589 247.133 15.299 296.195
@@ -38,12 +42,12 @@ C 177.309 486.721 289.651 505.793 372.43 464.152
 C 429.7 435.343 484.206 372.962 487.523 301.392
 C 489.849 251.205 472.979 191.709 431.636 158.091
 C 399.354 131.84 351.194 116.773 322.772 121.697 Z"
-      class="st0"
-    ></path>
-    <path
-      id="Green"
-      style="fill: rgb(75, 160, 66);"
-      d="M 127.181 92.553
+            class="st0"
+        ></path>
+        <path
+            id="Green"
+            style="fill: rgb(75, 160, 66)"
+            d="M 127.181 92.553
 C 136.578 91.118 146.59 91.647 157.051 93.763
 C 170.312 96.483 184.315 101.849 198.956 109.406
 C 201.311 110.727 204.2 110.652 206.278 108.876
@@ -66,45 +70,45 @@ C 369.394 108.8 332.091 126.451 319.114 128.353
 C 300.08 135.873 277.274 130.85 255.05 130.057
 C 234.799 129.339 215.871 135.04 198.063 130.356
 C 180.203 127.479 132.332 107.453 127.181 92.553 Z"
-      class="st1"
-    ></path>
-  </svg>
+            class="st1"
+        ></path>
+    </svg>
 </template>
 
 <script>
-  // @ is an alias to /src
-  const FACTOR = 3.7;
-  const OFFSET = 120;
+    // @ is an alias to /src
+    const FACTOR = 3.7;
+    const OFFSET = 120;
 
-  export default {
-    name: 'TomatoSvg',
-    props: {
-      reveal: {
-        type: [Number, String],
-        default: 99,
-      },
-    },
-    data() {
-      return {
-        maskTop: OFFSET,
-      };
-    },
-    updated() {
-      this.setPercent(this.reveal);
-    },
-    methods: {
-      setPercent(num) {
-        let val = 100 - num;
-        this.maskTop = val * FACTOR + OFFSET;
-      },
-    },
-    computed: {
-      percent() {
-        let off = this.maskTop - OFFSET;
-        return 100 - off / FACTOR;
-      },
-    },
-  };
+    export default {
+        name: 'TomatoSvg',
+        props: {
+            reveal: {
+                type: [Number, String],
+                default: 99,
+            },
+        },
+        data() {
+            return {
+                maskTop: OFFSET,
+            };
+        },
+        updated() {
+            this.setPercent(this.reveal);
+        },
+        methods: {
+            setPercent(num) {
+                let val = 100 - num;
+                this.maskTop = val * FACTOR + OFFSET;
+            },
+        },
+        computed: {
+            percent() {
+                let off = this.maskTop - OFFSET;
+                return 100 - off / FACTOR;
+            },
+        },
+    };
 </script>
 
 <style scoped></style>
