@@ -3,8 +3,14 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 import Home from '../views/Home.vue';
 import Calc from '../views/Calc.vue';
 import Wip from '../views/Wip.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes = [
+    {
+        path: '/:pathMatch(.*)*',
+        name: '404',
+        component: NotFound,
+    },
     {
         path: '/',
         name: 'Home',
