@@ -1,3 +1,4 @@
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import { fileURLToPath, URL } from 'url';
 
 import { defineConfig } from 'vite';
@@ -9,7 +10,7 @@ const out = 'vuebox';
 export default defineConfig({
     build: { outDir: `dist/${out}` },
     base: `/${out}/`,
-    plugins: [vue()],
+    plugins: [basicSsl(), vue()],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
