@@ -35,7 +35,6 @@
     import TomatoSvg from './components/TomatoSvg.vue';
 
     export default {
-        name: 'Tomato',
         components: {
             TomatoCalc,
             TomatoSvg,

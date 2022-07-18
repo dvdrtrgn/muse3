@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 
-import Home from '../views/Home.vue';
-import Calc from '../views/Calc.vue';
-import Wip from '../views/Wip.vue';
+import HomePage from '../views/HomePage.vue';
+import CalcPage from '../views/CalcPage.vue';
+import WipPage from '../views/WipPage.vue';
 import NotFound from '../views/NotFound.vue';
 
 const routes = [
@@ -14,70 +14,70 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home,
+        component: HomePage,
     },
     /* calc */ {
-        path: '/Calc',
+        path: '/calc',
         name: 'Calc',
-        component: Calc,
+        component: CalcPage,
         meta: {
             title: 'The Calc stuff',
         },
         children: [
             {
-                path: 'Percents',
+                path: 'percents',
                 name: 'Percents',
                 meta: {
                     title: 'The Elusive Percent',
                 },
-                component: () => import('../views/calc/Percents.vue'),
+                component: () => import('../views/calc/PercentsPage.vue'),
             },
             {
-                path: 'Velo',
+                path: 'velo',
                 name: 'Velo',
                 meta: {
                     title: 'The Counter Intuitive Flight',
                 },
-                component: () => import('../views/calc/Velo.vue'),
+                component: () => import('../views/calc/VeloPage.vue'),
             },
             {
-                path: 'Tomato',
+                path: 'tomato',
                 name: 'Tomato',
                 meta: {
                     title: 'The Counter Intuitive Tomato',
                 },
-                component: () => import('../views/calc/Tomato.vue'),
+                component: () => import('../views/calc/TomatoPage.vue'),
             },
             {
-                path: 'Cars',
+                path: 'cars',
                 name: 'Cars',
                 meta: {
                     title: 'The Counter Intuitive Cars',
                 },
-                component: () => import('../views/calc/Cars.vue'),
+                component: () => import('../views/calc/CarsPage.vue'),
             },
             {
-                path: 'Range',
+                path: 'range',
                 name: 'Range',
-                component: () => import('../views/calc/Range.vue'),
+                component: () => import('../views/calc/RangePage.vue'),
             },
         ],
     },
     /* wip */ {
         path: '/Wip',
         name: 'Wip',
-        component: Wip,
+        component: WipPage,
         meta: {
             title: 'The WIP stuff',
         },
         children: [
             {
-                path: 'Matrix',
+                path: 'matrix',
                 name: 'Matrix',
                 meta: {
                     title: 'The Freaky Matrix',
                 },
-                component: () => import('../views/calc/Matrix.vue'),
+                component: () => import('../views/calc/MatrixPage.vue'),
             },
             {
                 path: 'vmail',
@@ -85,14 +85,14 @@ const routes = [
                 meta: {
                     title: 'Forge Vmail',
                 },
-                component: () => import('../views/mail/Vmail.vue'),
+                component: () => import('../views/mail/VmailPage.vue'),
             },
         ],
     },
     {
         path: '/About',
         name: 'About',
-        component: () => import('../views/About.vue'),
+        component: () => import('../views/AboutPage.vue'),
     },
 ];
 

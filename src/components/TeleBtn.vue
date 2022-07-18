@@ -31,19 +31,19 @@
 
 <template>
     <Teleport :disabled="!side" :to="side">
-        <button @click="nextSide">TELE-PORT</button>
+        <button class="teleport" @click="nextSide">TELE-PORT</button>
     </Teleport>
 </template>
 
 <style lang="scss">
-    button {
+    button.teleport {
         background-color: red;
-        border-radius: 100%;
+        border-radius: 10%;
         font-weight: bold;
         height: 4em;
         width: 4em;
         aside & {
-            border-radius: 10%;
+            border-radius: 100%;
             opacity: 0.5;
         }
         &:hover {

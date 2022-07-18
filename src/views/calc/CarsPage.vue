@@ -133,11 +133,10 @@
     import CarFooter from './components/CarFooter.vue';
     import CarsABsvg from './components/CarsABsvg.vue';
 
-    const keepLessThan = (l, r) => (l >= r ? r - 1 : l);
-    const keepMoreThan = (l, r) => (l <= r ? r + 1 : l);
+    // const keepLessThan = (l, r) => (l >= r ? r - 1 : l);
+    // const keepMoreThan = (l, r) => (l <= r ? r + 1 : l);
 
     export default {
-        name: 'Cars',
         components: { CarsABsvg, CarSettings, CarFooter },
         setup() {
             return model;

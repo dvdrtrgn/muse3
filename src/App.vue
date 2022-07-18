@@ -1,24 +1,22 @@
-<template>
-    <NavBar />
-    <div :id="$route.name">
-        <router-view />
-    </div>
-    <TeleBtn></TeleBtn>
-</template>
-
 <script>
     import { defineComponent } from 'vue';
     import NavBar from './components/NavBar.vue';
-    import TeleBtn from './components/TeleBtn.vue';
 
     export default defineComponent({
-        components: { NavBar, TeleBtn },
+        components: { NavBar },
         setup() {
             return {};
         },
         mounted() {},
     });
 </script>
+
+<template>
+    <NavBar />
+    <div :id="$route.name">
+        <router-view />
+    </div>
+</template>
 
 <style lang="scss">
     body {
