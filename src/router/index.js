@@ -25,6 +25,14 @@ const routes = [
         },
         children: [
             {
+                path: 'area',
+                name: 'Area',
+                meta: {
+                    title: 'The Area',
+                },
+                component: () => import('../views/calc/AreaPage.vue'),
+            },
+            {
                 path: 'percents',
                 name: 'Percents',
                 meta: {

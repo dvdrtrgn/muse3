@@ -11,7 +11,7 @@
     export default {
         created() {
             this.$router.push({
-                name: 'Percents',
+                name: 'Area',
             });
         },
     };
