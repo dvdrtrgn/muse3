@@ -8,11 +8,8 @@
             return {
                 lib,
                 pxRatio: 1, // 1 meter... vary for zoom
-                list: [{ props: { id: 'a', width: 99 } }],
+                list: [{ props: { id: 'RedWide', height: 22, width: 99 } }],
             };
-        },
-        mounted() {
-            console.log(lib);
         },
         components: { RectSvg },
     };
