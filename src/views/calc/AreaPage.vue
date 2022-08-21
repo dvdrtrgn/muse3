@@ -1,42 +1,31 @@
-<script lang="ts">
+<script setup lang="ts">
     import lib from './libs/units.js';
-    import RectSvg from './components/RectSvg.vue';
+    import SvgArea from './components/Svg/SvgArea.vue';
 
-    export default {
-        name: 'AreaPage',
-        data() {
-            return {
-                lib,
-                pxRatio: 1, // 1 meter... vary for zoom
-                list: [{ props: { id: 'RedWide', height: 22, width: 99 } }],
-            };
-        },
-        components: { RectSvg },
-    };
+    const style1 = 'fill: red; opacity: 0.5;';
+    const style2 = 'fill: blue; opacity: 0.5;';
+
+    const list = [
+        { props: { id: 'RedWide', height: 22, width: 99, style: style1 } },
+        { props: { id: 'RedTall', height: 99, width: 22, style: style2 } },
+    ];
+
+    // return {
+    //     lib,
+    //     pxRatio: 1, // 1 meter... vary for zoom
+    // };
 </script>
 
 <template>
     <div id="AreaPage">
         <h1>AreaPage!</h1>
         <pre>{{ lib }}</pre>
-        <svg id="Svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-            <RectSvg v-for="item in list" :key="item.props.id" v-bind="item.props"></RectSvg>
-        </svg>
+        <SvgArea width="500" height="250" :list="list"></SvgArea>
     </div>
 </template>
 
 <style>
-    #Name {
-        background-color: azure;
-    }
-    #Svg {
-        outline: 1px solid red;
-        outline-offset: -1px;
-        position: relative;
-    }
-    #Div {
-        background-color: pink;
-        position: fixed;
-        touch-action: none;
+    #AreaPage {
+        background-color: #ffe;
     }
 </style>
