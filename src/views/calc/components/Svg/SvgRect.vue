@@ -13,9 +13,7 @@
         preventDefault: true,
     });
 
-    function picked($event) {
-        emits('picked', $event.target.id);
-    }
+    const picked = (evt) => emits('picked', evt);
 
     onUpdated(() => {
         const vals = rectVals(rect$.value);
@@ -25,9 +23,8 @@
 </script>
 
 <template>
-    <text :x="Rect.x + 1" :y="Rect.y + 10" style="font-size: 0.5rem">{{ id }}</text>
     <rect
-        @click="picked"
+        @dblclick="picked"
         :_="dragX || dragY"
         ref="rect$"
         :id="id"
@@ -38,4 +35,5 @@
         :style="style"
         :top="top"
     ></rect>
+    <text :x="Rect.x + 2" :y="Rect.y + 12" style="">{{ id }}</text>
 </template>

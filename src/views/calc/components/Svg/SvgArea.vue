@@ -3,13 +3,8 @@
     import SvgRect from './SvgRect.vue';
 
     defineProps(['list', 'height', 'width']);
-
-    const top = ref('');
-    const log = console.log;
-    function picked(id) {
-        top.value = id;
-        log(top.value);
-    }
+    const emits = defineEmits(['picked']);
+    const picked = (evt) => emits('picked', evt);
 </script>
 
 <template>
@@ -18,19 +13,13 @@
         <svg :viewBox="`0 0 ${width} ${height}`" xmlns="http://www.w3.org/2000/svg">
             <SvgRect
                 v-for="item in list"
-                @picked="picked"
-                :key="item.props.id"
-                v-bind="item.props"
-                :top="top === item.props.id ? '' : null"
+                @picked="picked(item)"
+                :key="item.id"
+                v-bind="item"
             ></SvgRect>
         </svg>
     </div>
 </template>
-<style>
-    [top] {
-        z-index: 9;
-    }
-</style>
 <style lang="scss">
     [svg-area] {
         position: relative;
@@ -40,6 +29,12 @@
             position: relative;
             &:hover {
                 z-index: 2;
+            }
+            text {
+                fill: white;
+                font-size: 0.7rem;
+                pointer-events: none;
+                text-shadow: black 0px 1px 2px;
             }
         }
         h2 {
