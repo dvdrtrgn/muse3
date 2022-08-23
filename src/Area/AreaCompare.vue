@@ -1,7 +1,8 @@
 <script setup lang="ts">
     import { reactive } from 'vue';
-    import lib from './units.js';
+    import lib from './lib/unitHelp';
     import SvgArea from './Svg/SvgArea.vue';
+    import { hoistElement } from './lib/arrayHelp';
 
     const style1 = 'fill: red; opacity: 0.7;';
     const style2 = 'fill: blue; opacity: 0.7;';
@@ -12,17 +13,6 @@
         { id: 'Wide', height: 33, width: 99, style: style1 },
         { id: 'Tall', height: 99, width: 33, style: style2 },
     ]);
-
-    const moveItem = (arr, idx1, idx2) => arr.splice(idx2, 0, arr.splice(idx1, 1)[0]);
-
-    function hoistElement(arr, item) {
-        let idx1 = arr.indexOf(item);
-        let idx2 = arr.length;
-        // foremost? bury!
-        if (idx1 + 1 === idx2) idx2 = 0;
-
-        moveItem(arr, idx1, idx2);
-    }
 
     function picked(item) {
         hoistElement(list, item);
@@ -37,8 +27,8 @@
 <template>
     <div id="AreaPage">
         <h1>AreaPage</h1>
-        <input v-model="canvas.width" />
-        <input v-model="canvas.height" />
+        <input type="number" step="100" v-model="canvas.width" />
+        <input type="number" step="100" v-model="canvas.height" />
         <pre>{{ lib }}</pre>
         <SvgArea
             :list="list"

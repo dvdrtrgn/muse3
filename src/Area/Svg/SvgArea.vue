@@ -10,7 +10,10 @@
 <template>
     <div svg-area>
         <h2>SvgArea</h2>
-        <svg :viewBox="`0 0 ${width} ${height}`" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            :viewBox="`${width / -2} ${height / -2} ${width} ${height}`"
+            xmlns="http://www.w3.org/2000/svg"
+        >
             <SvgRect
                 v-for="item in list"
                 @picked="picked(item)"
